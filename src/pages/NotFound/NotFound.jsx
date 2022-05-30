@@ -14,7 +14,7 @@ export const NotFound = () => {
                     />
                 </section>
                 <section className='m-8'>
-                    <Link to={"/"} className='border-2 py-2 px-4 rounded btn-primary font-bold text-center m-8'>Go to Chaupal</Link>
+                    <Link to={"/"} className='py-2 px-4 rounded btn-primary font-bold text-center m-8'>Go to Chaupal</Link>
                 </section>
             </div>
         </>

@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { Home, Landing, NotFound } from "../pages";
+import { Bookmark, Explore, Home, Landing, NotFound, Profile } from "../pages";
 
 export const NavigationRoutes = () => {
 	return (
@@ -7,6 +7,9 @@ export const NavigationRoutes = () => {
 			<Route path="*" element={<NotFound />} />
 			<Route path="/" element={<Landing />} />
 			<Route path="/home" element={<Home />} />
+			<Route path="/explore" element={<Explore />} />
+			<Route path="/bookmark" element={<Bookmark />} />
+			<Route path="/profile" element={<Profile />} />
 		</Routes>
 	);
 };

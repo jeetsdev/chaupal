@@ -1,0 +1,46 @@
+/* Container styles here  */
+
+.left-container {
+	min-width: 20%;
+	left: 0;
+}
+
+.mid-container {
+	margin-left: 20%;
+	margin-right: 25%;
+}
+
+.right-container {
+	min-width: 25%;
+	right: 0;
+}
+
+/*! Header style here */
+
+.main-header {
+	height: 5rem;
+	background-color: var(--primary-bg-color);
+	border-color: var(--secondary-color);
+}
+
+/*! Navbar  */
+
+.navbar-link:hover{
+	transition: color .3s ease-in-out;
+	color: var(--primary-hover-color);
+}
+
+
+/* ! Content container here */
+
+.content-container {
+	margin-top: 80px;
+}
+
+/*! New Post Card style here */
+
+
+/*! Footer style here */
+footer{
+	border-color: var(--secondary-color);
+}

@@ -1,7 +1,7 @@
-import { Footer, Header, NewPostCard, PostCard, Sidebar, WhoToFollowCard } from "../../components"
-import "./Home.css";
+import { ExploreBar, Footer, Header, PostCard, Sidebar, WhoToFollowCard } from "../../components"
+import "./Explore.css"
 
-export const Home = () => {
+export const Explore = () => {
     return (
         <main className="main-container">
             <Header />
@@ -9,9 +9,9 @@ export const Home = () => {
                 <div className="left-container fixed ">
                     <Sidebar />
                 </div>
-                <div className="mid-container flex flex-col gap-4">
+                <section className="mid-container flex flex-col gap-4 min-h-screen">
                     <div>
-                        <NewPostCard />
+                        <ExploreBar />
                     </div>
                     <div>
                         <PostCard />
@@ -19,7 +19,7 @@ export const Home = () => {
                         <PostCard />
                         <PostCard />
                     </div>
-                </div>
+                </section>
                 <section className="right-container fixed">
                     <WhoToFollowCard />
                 </section>
