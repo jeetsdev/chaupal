@@ -1,5 +1,4 @@
-/* Container styles here  */
-
+/*! Container styles here  */
 .left-container {
 	min-width: 20%;
 	left: 0;
@@ -16,7 +15,6 @@
 }
 
 /*! Header style here */
-
 .main-header {
 	height: 5rem;
 	background-color: var(--primary-bg-color);
@@ -24,23 +22,17 @@
 }
 
 /*! Navbar  */
-
-.navbar-link:hover{
-	transition: color .3s ease-in-out;
+.navbar-link:hover {
+	transition: color 0.3s ease-in-out;
 	color: var(--primary-hover-color);
 }
 
-
 /* ! Content container here */
-
 .content-container {
-	margin-top: 80px;
+	margin-top: 5rem;
 }
 
-/*! New Post Card style here */
-
-
 /*! Footer style here */
-footer{
+footer {
 	border-color: var(--secondary-color);
 }

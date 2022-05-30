@@ -10,9 +10,9 @@
 
 :root {
 	--primary-color: #6e3ee4;
-	--secondary-color: #e7dfe8;
 	--secondary-color: #a19ca2;
 	--primary-hover-color: #49279d;
+	--font-color: #ffffff;
 	--primary-bg-color: #f9f5ff;
 }
 
@@ -24,7 +24,7 @@ body {
 /** Buttons style here */
 .btn-primary {
 	background-color: var(--primary-color);
-	color: white;
+	color: var(--font-color);
 	transition: background-color 0.3s;
 }
 
@@ -51,11 +51,11 @@ body {
 
 .btn-primary-outline:hover {
 	background-color: var(--primary-color);
-	color: white;
+	color: var(--font-color);
 }
 
 .btn-secondary:hover {
-	color: white;
+	color: var(--font-color);
 	background-color: var(--primary-color);
 }
 
