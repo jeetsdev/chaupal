@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { NotRequireAuth } from "../components";
-import { RequireAuth } from "../components/Auth/RequireAuth";
+import { NotRequireAuth, RequireAuth } from "../components";
 import {
 	Bookmark,
 	Explore,
