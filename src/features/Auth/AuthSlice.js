@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 
 // Getting data from localStorage
 const token = localStorage.getItem("encoded-token") || "";
-const userInfo = JSON.parse(localStorage.getItem("userData")) || null;
+const userInfo = JSON.parse(localStorage.getItem("user-data")) || null;
 
 const initialState = {
 	authToken: token,
@@ -50,7 +50,7 @@ export const authSlice = createSlice({
 			state.authToken = "";
 			state.userData = "";
 			localStorage.removeItem("encoded-token");
-			localStorage.removeItem("userData");
+			localStorage.removeItem("user-data");
 			toast.success("Sign out successful");
 		},
 	},
@@ -70,7 +70,7 @@ export const authSlice = createSlice({
 			// If remember me is true then save
 			if (meta.arg.rememberMe) {
 				localStorage.setItem("encoded-token", encodedToken);
-				localStorage.setItem("userData", JSON.stringify(foundUser));
+				localStorage.setItem("user-data", JSON.stringify(foundUser));
 			}
 			toast.success(`Welcome back ${foundUser.fullName}`);
 			state.authToken = encodedToken;
@@ -108,7 +108,7 @@ export const authSlice = createSlice({
 			state.authToken = encodedToken;
 			state.userData = createdUser;
 			localStorage.setItem("encoded-token", encodedToken);
-			localStorage.setItem("userData", JSON.stringify(createdUser));
+			localStorage.setItem("user-data", JSON.stringify(createdUser));
 		},
 		[userSignUp.rejected]: (state, { payload }) => {
 			state.loading = false;
