@@ -4,6 +4,7 @@ import { landingImg } from '../../assets'
 
 export const Landing = () => {
 
+
     return (
         <main className='flex justify-center items-center min-h-screen'>
             <div className='landing-container grid grid-cols-2 place-items-center-center w-4/5'>
@@ -18,7 +19,7 @@ export const Landing = () => {
                             <span className='text-primary font-primary font-extrabold text-3xl'>I</span>n the world of Facebook and Instagram, be someone <span className='text-primary font-primary font-extrabold text-3xl'>चौपाल</span> Mate...
                         </p>
                         <div className='flex flex-col my-8 w-full'>
-                            <Link to={"/login"} className='border-2 py-2 px-4 rounded btn-primary text-lg font-bold text-center'>Login
+                            <Link to={"/login"} className='py-2 px-4 rounded btn-primary text-lg font-bold text-center'>Login
                             </Link>
                             <p className='text-center m-4'>Don't have an account ?
                                 <Link to={"/signup"} className='underline hover:no-underline mx-2 text-primary transition transition-underline'>Sign Up</Link>

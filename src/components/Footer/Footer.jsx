@@ -2,7 +2,7 @@ import { BsGithub, BsTwitter, BsLinkedin, BsBagFill } from "react-icons/bs"
 
 export const Footer = () => {
   return (
-    <footer className="flex justify-between items-center w-full py-4 px-8 border-t-2 mt-4">
+    <footer className="flex justify-between items-center w-full py-4 px-8 border-t-2 mt-auto">
       <section>
         <p>Made with ❤️ by <span className="text-primary">Jeetsdev</span></p>
       </section>

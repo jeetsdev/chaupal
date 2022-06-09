@@ -1,4 +1,6 @@
 import { Route, Routes } from "react-router-dom";
+import { NotRequireAuth } from "../components";
+import { RequireAuth } from "../components/Auth/RequireAuth";
 import {
 	Bookmark,
 	Explore,
@@ -14,13 +16,17 @@ export const NavigationRoutes = () => {
 	return (
 		<Routes>
 			<Route path="*" element={<NotFound />} />
-			<Route path="/" element={<Landing />} />
-			<Route path="/home" element={<Home />} />
-			<Route path="/explore" element={<Explore />} />
-			<Route path="/bookmark" element={<Bookmark />} />
-			<Route path="/profile" element={<Profile />} />
-			<Route path="/login" element={<Login />} />
-			<Route path="/signup" element={<SignUp />} />
+			<Route element={<RequireAuth />}>
+				<Route path="/home" element={<Home />} />
+				<Route path="/explore" element={<Explore />} />
+				<Route path="/bookmark" element={<Bookmark />} />
+				<Route path="/profile" element={<Profile />} />
+			</Route>
+			<Route element={<NotRequireAuth />}>
+				<Route path="/" element={<Landing />} />
+				<Route path="/login" element={<Login />} />
+				<Route path="/signup" element={<SignUp />} />
+			</Route>
 		</Routes>
 	);
 };
