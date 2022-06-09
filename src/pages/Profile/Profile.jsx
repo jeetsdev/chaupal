@@ -14,6 +14,7 @@ export const Profile = () => {
                         <p className="text-sm mx-2 text-gray-600 font-semibold font-primary"> (4 posts )</p>
                     </div>
                     <div>
+                        {/* User details here */}
                         <UserProfileCard />
                         <OtherProfileCard />
                         <p className="mx-8 my-6 text-xl font-bold">Your Posts</p>

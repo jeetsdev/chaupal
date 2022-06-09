@@ -1,15 +1,31 @@
 import { Route, Routes } from "react-router-dom";
-import { Bookmark, Explore, Home, Landing, NotFound, Profile } from "../pages";
+import { NotRequireAuth, RequireAuth } from "../components";
+import {
+	Bookmark,
+	Explore,
+	Home,
+	Landing,
+	NotFound,
+	Profile,
+	Login,
+	SignUp,
+} from "../pages";
 
 export const NavigationRoutes = () => {
 	return (
 		<Routes>
 			<Route path="*" element={<NotFound />} />
-			<Route path="/" element={<Landing />} />
-			<Route path="/home" element={<Home />} />
-			<Route path="/explore" element={<Explore />} />
-			<Route path="/bookmark" element={<Bookmark />} />
-			<Route path="/profile" element={<Profile />} />
+			<Route element={<RequireAuth />}>
+				<Route path="/home" element={<Home />} />
+				<Route path="/explore" element={<Explore />} />
+				<Route path="/bookmark" element={<Bookmark />} />
+				<Route path="/profile" element={<Profile />} />
+			</Route>
+			<Route element={<NotRequireAuth />}>
+				<Route path="/" element={<Landing />} />
+				<Route path="/login" element={<Login />} />
+				<Route path="/signup" element={<SignUp />} />
+			</Route>
 		</Routes>
 	);
 };

@@ -8,3 +8,6 @@ export { Footer } from "./Footer/Footer";
 export { BookmarkCard } from "./Cards/Bookmark/BookmarkCard";
 export { UserProfileCard } from "./Cards/Profile/UserProfileCard";
 export { OtherProfileCard } from "./Cards/Profile/OtherProfileCard";
+export { RequireAuth } from "./Auth/RequireAuth";
+export { NotRequireAuth } from "./Auth/NotRequireAuth";
+export { MyToast } from "./MyToast/MyToast";
