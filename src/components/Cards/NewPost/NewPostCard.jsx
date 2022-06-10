@@ -1,17 +1,32 @@
-import { avatar } from "../../../assets"
 import { FaRegImages } from "react-icons/fa"
 import { AiOutlineFileGif } from "react-icons/ai"
 import { VscSmiley } from "react-icons/vsc"
+import { useDispatch, useSelector } from "react-redux"
+import { useState } from "react"
+import { createNewPost } from "../../../features/Post/PostSlice"
 
 export const NewPostCard = () => {
+
+    const { userData, authToken } = useSelector(state => state.auth);
+    const dispatch = useDispatch();
+    const [postData, setPostData] = useState({
+        content: "",
+    })
+
+    const postSubmitHandler = (event) => {
+        event.preventDefault();
+        dispatch(createNewPost({ postData, authToken }));
+        setPostData({ ...postData, content: "" });
+    }
+
     return (
-        <main className="flex rounded bg-white p-4 mx-8 my-6">
+        <main className="flex rounded bg-white p-4 mx-8 my-6 relative">
             <section>
-                <img src={avatar} alt="" className="w-10 mr-4" />
+                <img src={userData.avatar} alt="" className="w-10 h-10 rounded-full p-px border-2 object-cover mr-4" />
             </section>
-            <form className="w-full">
+            <form className="w-full" onSubmit={postSubmitHandler}>
                 <div>
-                    <textarea type="text" className="w-full min-w-full p-2 bg-inherit border-2 rounded outline-none resize-none" placeholder="What's happening...?" />
+                    <textarea type="text" className="w-full min-w-full p-2 bg-inherit border-2 rounded outline-none resize-none" placeholder="What's happening...?" value={postData.content} onChange={(event) => setPostData({ ...postData, content: event.target.value })} />
                 </div>
                 <div className="flex items-center">
                     <div className="flex text-xl">
