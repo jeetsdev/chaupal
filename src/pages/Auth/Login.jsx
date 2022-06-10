@@ -38,7 +38,7 @@ export const Login = () => {
         setloginFormData({
             ...loginFormData,
             username: "chaupal1",
-            password: "Chaupal@123",
+            password: "chaupal@123",
         })
     }
 
