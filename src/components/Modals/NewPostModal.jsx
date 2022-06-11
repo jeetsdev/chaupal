@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
 import { createNewPost, toggleNewPostModal } from "../../features/Post/PostSlice"
 import "./NewPostModal.css"
+import toast from "react-hot-toast"
 
 export const NewPostModal = () => {
 
@@ -18,9 +19,13 @@ export const NewPostModal = () => {
 
     const postSubmitHandler = (event) => {
         event.preventDefault();
-        dispatch(createNewPost({ postData, authToken }));
-        setPostData({ ...postData, content: "" });
-        // dispatch(toggleNewPostModal())
+        if (postData.content !== "") {
+            dispatch(createNewPost({ postData, authToken }));
+            setPostData({ ...postData, content: "" });
+        }
+        else {
+            toast.error("Post can't be empty");
+        }
     }
 
 

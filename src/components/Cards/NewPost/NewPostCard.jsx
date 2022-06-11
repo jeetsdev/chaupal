@@ -4,6 +4,7 @@ import { VscSmiley } from "react-icons/vsc"
 import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
 import { createNewPost } from "../../../features/Post/PostSlice"
+import toast from "react-hot-toast"
 
 export const NewPostCard = () => {
 
@@ -15,8 +16,13 @@ export const NewPostCard = () => {
 
     const postSubmitHandler = (event) => {
         event.preventDefault();
-        dispatch(createNewPost({ postData, authToken }));
-        setPostData({ ...postData, content: "" });
+        if (postData.content !== "") {
+            dispatch(createNewPost({ postData, authToken }));
+            setPostData({ ...postData, content: "" });
+        }
+        else {
+            toast.error("Post can't be empty");
+        }
     }
 
     return (
