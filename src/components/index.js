@@ -1,3 +1,4 @@
+export { NewPostModal } from "./Modals/NewPostModal";
 export { Sidebar } from "./Sidebar/Sidebar";
 export { NewPostCard } from "./Cards/NewPost/NewPostCard";
 export { Header } from "./Header/Header";

@@ -10,6 +10,7 @@ const initialState = {
 	allPosts: [],
 	posts: [],
 	loading: false,
+	postModal: false,
 };
 
 // All post here
@@ -28,7 +29,7 @@ export const getAllPost = createAsyncThunk(
 export const createNewPost = createAsyncThunk(
 	"posts/createNewPost",
 	async ({ postData, authToken }, { rejectWithValue }) => {
-		console.log('authToken: ', authToken);
+		console.log("authToken: ", authToken);
 		try {
 			return await createNewPostService(postData, authToken);
 		} catch (error) {
@@ -52,7 +53,11 @@ export const getUserPost = createAsyncThunk(
 export const postSlice = createSlice({
 	name: "posts",
 	initialState,
-	reducers: {},
+	reducers: {
+		toggleNewPostModal: (state) => {
+			state.postModal= !state.postModal;
+		},
+	},
 	extraReducers: {
 		//! All post reducer here
 		[getAllPost.pending]: (state) => {
@@ -67,18 +72,17 @@ export const postSlice = createSlice({
 			toast.error("Some error occured while fetching posts.");
 		},
 
-
 		//! Create new post reducer here
 		[createNewPost.pending]: (state) => {
 			state.loading = true;
 		},
-		[createNewPost.fulfilled]: (state, {payload}) => {
+		[createNewPost.fulfilled]: (state, { payload }) => {
 			state.loading = false;
 			state.allPosts = payload?.data?.posts;
-			toast.success("Posted successfully.")
+			toast.success("Posted successfully.");
 		},
 		[createNewPost.rejected]: (state, action) => {
-			console.log('action: ', action);
+			console.log("action: ", action);
 			state.loading = false;
 			toast.error("Some error occured while creating posts.");
 		},
@@ -100,4 +104,5 @@ export const postSlice = createSlice({
 	},
 });
 
+export const { toggleNewPostModal } = postSlice.actions;
 export default postSlice.reducer;

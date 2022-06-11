@@ -12,6 +12,7 @@
 	--primary-color: #6e3ee4;
 	--secondary-color: #a19ca2;
 	--primary-hover-color: #49279d;
+	--primary-transparent-color: #a8a7a97c;
 	--font-color: #ffffff;
 	--primary-bg-color: #f9f5ff;
 }
@@ -77,4 +78,8 @@ body {
 
 .bg-secondary {
 	background-color: var(--secondary-bg-color);
+}
+
+.bg-transparent {
+	background-color: var(--primary-transparent-color);
 }
