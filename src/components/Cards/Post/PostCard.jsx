@@ -1,14 +1,16 @@
-import { BsHeart, BsBookmarkPlusFill, BsThreeDotsVertical, BsFillChatFill } from "react-icons/bs"
+import { BsHeart, BsHeartFill, BsBookmarkPlusFill, BsThreeDotsVertical, BsChatDots } from "react-icons/bs"
 import { AiFillEdit, AiFillDelete } from "react-icons/ai"
 import { useDispatch, useSelector } from "react-redux"
 import "./PostCard.css"
 import { useState } from "react"
 import { EditPostModal } from "../../Modals/EditPostModal"
-import { deleteUserPost } from "../../../features/Post/PostSlice"
+import { deleteUserPost, dislikePost, likePost } from "../../../features/Post/PostSlice"
 
 export const PostCard = ({ post }) => {
 
     const { userData: { username }, authToken } = useSelector(state => state.auth);
+    console.log('username: ', username);
+    console.log(post?.likes?.likedBy);
     const [postMenu, setPostMenu] = useState(false);
     const [editModal, setEditModal] = useState(false);
     const dispatch = useDispatch();
@@ -22,6 +24,16 @@ export const PostCard = ({ post }) => {
         dispatch(deleteUserPost({ postID: post._id, authToken }));
         setPostMenu(prev => !prev);
     }
+
+    const likeHandler = () => {
+        dispatch(likePost({ postID: post._id, authToken }));
+    }
+
+    const dislikeHandler = () => {
+        dispatch(dislikePost({ postID: post._id, authToken }));
+    }
+
+    const isAlreadyLikedByUser = post?.likes?.likedBy.some(user => user.username === username);
 
     return (
         <main className="flex g-secondary p-4 mx-8 bg-white my-2 rounded z-10">
@@ -40,11 +52,18 @@ export const PostCard = ({ post }) => {
                 <div className="flex justify-between text-xl mt-6">
                     <div className="flex justify-center items-center gap-4">
                         <div className="flex justify-center items-center">
-                            <BsHeart className="icon-btn hover:cursor-pointer" />
-                            <span className="mx-1 text-sm">{post?.likes.likeCount}</span>
+
+                            {/* Checking if already liked */}
+                            {
+                                isAlreadyLikedByUser ?
+                                    <BsHeartFill className="text-primary btn-icon hover:cursor-pointer" onClick={dislikeHandler} />
+                                    :
+                                    <BsHeart className="text-primary btn-icon hover:cursor-pointer" onClick={likeHandler} />
+                            }
+                            <span className="mx-1 text-sm">{post?.likes?.likeCount}</span>
                         </div>
                         <div className="flex justify-center items-center">
-                            <BsFillChatFill className="icon-btn hover:cursor-pointer" />
+                            <BsChatDots className="text-primary btn-icon hover:cursor-pointer" />
                             <span className="mx-1 text-sm">{post?.comments?.length}</span>
                         </div>
                     </div>
@@ -58,10 +77,10 @@ export const PostCard = ({ post }) => {
 
                             {/* Checking if this is the user post */}
                             {username === post?.username && <div className="flex gap-1">
-                                <AiFillEdit className="text-3xl rounded hover:cursor-pointer hover:text-blue-500 icon-btn transition-colors p-1" onClick={editHandler} />
-                                <AiFillDelete className="text-3xl rounded hover:cursor-pointer hover:text-blue-500 icon-btn transition-colors p-1" onClick={deleteHandler} />
+                                <AiFillEdit className="text-3xl rounded hover:cursor-pointer hover:text-blue-500 btn-icon transition-colors p-1" onClick={editHandler} />
+                                <AiFillDelete className="text-3xl rounded hover:cursor-pointer hover:text-blue-500 btn-icon transition-colors p-1" onClick={deleteHandler} />
                             </div>}
-                            <BsBookmarkPlusFill className="text-3xl rounded icon-btn hover:cursor-pointer hover:text-blue-500 transition-colors p-1" />
+                            <BsBookmarkPlusFill className="text-3xl rounded btn-icon hover:cursor-pointer hover:text-blue-500 transition-colors p-1" />
                         </div>
                     </div>
                 </div>

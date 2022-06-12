@@ -7,14 +7,8 @@ import "./Home.css";
 
 export const Home = () => {
 
-    const dispatch = useDispatch();
     const { allPosts, loading } = useSelector(state => state.post);
 
-
-    // Getting all post here
-    useEffect(() => {
-        dispatch(getAllPost());
-    }, [dispatch])
 
     return (
         <main className="main-container">

@@ -6,6 +6,8 @@ import {
 	getUserPostService,
 	updateUserPostService,
 	deleteUserPostService,
+	likePostService,
+	dislikePostService,
 } from "../../services/PostService";
 
 const initialState = {
@@ -57,10 +59,34 @@ export const updateUserPost = createAsyncThunk(
 export const deleteUserPost = createAsyncThunk(
 	"posts/deleteUserPost",
 	async ({ postID, authToken }, { rejectWithValue }) => {
-		console.log("postID: ", postID);
-		console.log("authToken: ", authToken);
 		try {
 			return await deleteUserPostService(postID, authToken);
+		} catch (error) {
+			return rejectWithValue(error);
+		}
+	},
+);
+
+// Like post
+export const likePost = createAsyncThunk(
+	"posts/likePost",
+	async ({ postID, authToken }, { rejectWithValue }) => {
+		console.log("authToken: ", authToken);
+		try {
+			return await likePostService(postID, authToken);
+		} catch (error) {
+			return rejectWithValue(error);
+		}
+	},
+);
+
+// Dislike post
+export const dislikePost = createAsyncThunk(
+	"posts/dislikePost",
+	async ({ postID, authToken }, { rejectWithValue }) => {
+		console.log("authToken: ", authToken);
+		try {
+			return await dislikePostService(postID, authToken);
 		} catch (error) {
 			return rejectWithValue(error);
 		}
@@ -143,6 +169,30 @@ export const postSlice = createSlice({
 			console.log("action: ", action);
 			state.loading = false;
 			toast.error("Some error occured while deleting posts.");
+		},
+
+		//! Like user post reducer here
+		[likePost.fulfilled]: (state, { payload }) => {
+			state.loading = false;
+			state.allPosts = payload?.data?.posts;
+			toast.success("Liked successfully.");
+		},
+		[likePost.rejected]: (state, action) => {
+			console.log("action: ", action);
+			state.loading = false;
+			toast.error("Some error occured while Liking posts.");
+		},
+
+		//! Dislike post reducer here
+		[dislikePost.fulfilled]: (state, { payload }) => {
+			state.loading = false;
+			state.allPosts = payload?.data?.posts;
+			toast.success("Removed from likes.");
+		},
+		[dislikePost.rejected]: (state, action) => {
+			console.log("action: ", action);
+			state.loading = false;
+			toast.error("Some error occured while Disliking posts.");
 		},
 
 		// ! Single user post reducer headers
