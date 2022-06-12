@@ -4,6 +4,7 @@ import {
 	createNewPostService,
 	getAllPostService,
 	getUserPostService,
+	updateUserPostService,
 } from "../../services/PostService";
 
 const initialState = {
@@ -38,6 +39,18 @@ export const createNewPost = createAsyncThunk(
 	},
 );
 
+export const updateUserPost = createAsyncThunk(
+	"posts/updateUserPost",
+	async ({ postID, postData, authToken }, { rejectWithValue }) => {
+		console.log("authToken: ", authToken);
+		try {
+			return await updateUserPostService(postID, postData, authToken);
+		} catch (error) {
+			return rejectWithValue(error);
+		}
+	},
+);
+
 // Get specific user posts here
 export const getUserPost = createAsyncThunk(
 	"posts/getUserPost",
@@ -55,7 +68,7 @@ export const postSlice = createSlice({
 	initialState,
 	reducers: {
 		toggleNewPostModal: (state) => {
-			state.postModal= !state.postModal;
+			state.postModal = !state.postModal;
 		},
 	},
 	extraReducers: {
@@ -87,13 +100,25 @@ export const postSlice = createSlice({
 			toast.error("Some error occured while creating posts.");
 		},
 
-		// ! Single user post reducer headers
+		//! Update user post reducer here
+		[updateUserPost.pending]: (state) => {
+			state.loading = true;
+		},
+		[updateUserPost.fulfilled]: (state, { payload }) => {
+			state.loading = false;
+			state.allPosts = payload?.data?.posts;
+			toast.success("Updated successfully.");
+		},
+		[updateUserPost.rejected]: (state, action) => {
+			state.loading = false;
+			toast.error("Some error occured while updating posts.");
+		},
 
+		// ! Single user post reducer headers
 		[getUserPost.pending]: (state) => {
 			state.loading = true;
 		},
 		[getUserPost.fulfilled]: (state, action) => {
-			console.log("action: ", action);
 			state.loading = false;
 			// state.allPosts = payload?.data?.posts;
 		},

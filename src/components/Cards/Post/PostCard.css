@@ -1,0 +1,13 @@
+.show-menu{
+    transform: translateX(0);
+    transform-origin: right;
+	transition: transform .4s ease-in-out;
+    visibility: visible;
+}   
+
+.hide-menu{
+    transform-origin: right;
+    transition: transform .4s ease-in-out;
+    transform: translateY(-10px);
+    visibility: hidden;
+}
