@@ -5,6 +5,7 @@ import {
 	getAllPostService,
 	getUserPostService,
 	updateUserPostService,
+	deleteUserPostService,
 } from "../../services/PostService";
 
 const initialState = {
@@ -39,12 +40,27 @@ export const createNewPost = createAsyncThunk(
 	},
 );
 
+// Update user post
 export const updateUserPost = createAsyncThunk(
 	"posts/updateUserPost",
 	async ({ postID, postData, authToken }, { rejectWithValue }) => {
 		console.log("authToken: ", authToken);
 		try {
 			return await updateUserPostService(postID, postData, authToken);
+		} catch (error) {
+			return rejectWithValue(error);
+		}
+	},
+);
+
+// Delete user post
+export const deleteUserPost = createAsyncThunk(
+	"posts/deleteUserPost",
+	async ({ postID, authToken }, { rejectWithValue }) => {
+		console.log("postID: ", postID);
+		console.log("authToken: ", authToken);
+		try {
+			return await deleteUserPostService(postID, authToken);
 		} catch (error) {
 			return rejectWithValue(error);
 		}
@@ -112,6 +128,21 @@ export const postSlice = createSlice({
 		[updateUserPost.rejected]: (state, action) => {
 			state.loading = false;
 			toast.error("Some error occured while updating posts.");
+		},
+
+		//! Delete user post reducer here
+		[deleteUserPost.pending]: (state) => {
+			state.loading = true;
+		},
+		[deleteUserPost.fulfilled]: (state, { payload }) => {
+			state.loading = false;
+			state.allPosts = payload?.data?.posts;
+			toast.success("Deleted successfully.");
+		},
+		[deleteUserPost.rejected]: (state, action) => {
+			console.log("action: ", action);
+			state.loading = false;
+			toast.error("Some error occured while deleting posts.");
 		},
 
 		// ! Single user post reducer headers

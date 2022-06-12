@@ -28,6 +28,12 @@ export const updateUserPostService = (postId, postData, authToken) => {
 	);
 };
 
+export const deleteUserPostService = (postId, authToken) => {
+	return axios.delete(`/api/posts/${postId}`, {
+		headers: { authorization: authToken },
+	});
+};
+
 export const getUserPostService = (username) => {
 	return axios.get(`/api/posts/user/${username}`);
 };

@@ -1,18 +1,25 @@
 import { BsHeart, BsBookmarkPlusFill, BsThreeDotsVertical, BsFillChatFill } from "react-icons/bs"
 import { AiFillEdit, AiFillDelete } from "react-icons/ai"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import "./PostCard.css"
 import { useState } from "react"
 import { EditPostModal } from "../../Modals/EditPostModal"
+import { deleteUserPost } from "../../../features/Post/PostSlice"
 
 export const PostCard = ({ post }) => {
 
-    const { userData: { username } } = useSelector(state => state.auth);
+    const { userData: { username }, authToken } = useSelector(state => state.auth);
     const [postMenu, setPostMenu] = useState(false);
     const [editModal, setEditModal] = useState(false);
+    const dispatch = useDispatch();
 
     const editHandler = () => {
         setEditModal(prev => !prev);
+        setPostMenu(prev => !prev);
+    }
+
+    const deleteHandler = () => {
+        dispatch(deleteUserPost({ postID: post._id, authToken }));
         setPostMenu(prev => !prev);
     }
 
@@ -52,7 +59,7 @@ export const PostCard = ({ post }) => {
                             {/* Checking if this is the user post */}
                             {username === post?.username && <div className="flex gap-1">
                                 <AiFillEdit className="text-3xl rounded hover:cursor-pointer hover:text-blue-500 icon-btn transition-colors p-1" onClick={editHandler} />
-                                <AiFillDelete className="text-3xl rounded hover:cursor-pointer hover:text-blue-500 icon-btn transition-colors p-1" />
+                                <AiFillDelete className="text-3xl rounded hover:cursor-pointer hover:text-blue-500 icon-btn transition-colors p-1" onClick={deleteHandler} />
                             </div>}
                             <BsBookmarkPlusFill className="text-3xl rounded icon-btn hover:cursor-pointer hover:text-blue-500 transition-colors p-1" />
                         </div>
