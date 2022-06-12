@@ -65,13 +65,13 @@ body {
 	color: var(--primary-color);
 }
 
-.icon-btn{
+.btn-icon {
 	background-color: var(--primary-bg-color);
-	transition: transform .4s ease-in-out;
+	transition: transform 0.4s ease-in-out;
 }
 
-.icon-btn:hover{
-	transform: scale(1.1);
+.btn-icon:hover {
+	transform: translateY(-2px);
 	color: var(--primary-color);
 }
 
