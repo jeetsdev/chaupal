@@ -1,19 +1,23 @@
-import { BsHeart, BsHeartFill, BsBookmarkPlusFill, BsThreeDotsVertical, BsChatDots } from "react-icons/bs"
+import { BsHeart, BsHeartFill, BsBookmarkPlusFill, BsBookmarkCheckFill, BsThreeDotsVertical, BsChatDots } from "react-icons/bs"
 import { AiFillEdit, AiFillDelete } from "react-icons/ai"
 import { useDispatch, useSelector } from "react-redux"
 import "./PostCard.css"
 import { useState } from "react"
 import { EditPostModal } from "../../Modals/EditPostModal"
-import { deleteUserPost, dislikePost, likePost } from "../../../features/Post/PostSlice"
+import { addToBookmark, deleteUserPost, dislikePost, likePost } from "../../../features/Post/PostSlice"
+import toast from "react-hot-toast"
 
 export const PostCard = ({ post }) => {
 
     const { userData: { username }, authToken } = useSelector(state => state.auth);
-    console.log('username: ', username);
-    console.log(post?.likes?.likedBy);
+    const { bookmarkedPost } = useSelector(state => state.post);
+
+
     const [postMenu, setPostMenu] = useState(false);
     const [editModal, setEditModal] = useState(false);
     const dispatch = useDispatch();
+    const isAlreadyLikedByUser = post?.likes?.likedBy.some(user => user.username === username);
+    const isAlreadyBookmarkedByUser = bookmarkedPost.some(eachPost => eachPost._id === post._id);
 
     const editHandler = () => {
         setEditModal(prev => !prev);
@@ -25,6 +29,16 @@ export const PostCard = ({ post }) => {
         setPostMenu(prev => !prev);
     }
 
+    const bookmarkHandler = () => {
+        if (isAlreadyBookmarkedByUser) {
+            toast.error("Already in bookmarked.")
+        }
+        else {
+            dispatch(addToBookmark({ postID: post._id, authToken }));
+        }
+        setPostMenu(prev => !prev);
+    }
+
     const likeHandler = () => {
         dispatch(likePost({ postID: post._id, authToken }));
     }
@@ -33,7 +47,6 @@ export const PostCard = ({ post }) => {
         dispatch(dislikePost({ postID: post._id, authToken }));
     }
 
-    const isAlreadyLikedByUser = post?.likes?.likedBy.some(user => user.username === username);
 
     return (
         <main className="flex g-secondary p-4 mx-8 bg-white my-2 rounded z-10">
@@ -80,7 +93,14 @@ export const PostCard = ({ post }) => {
                                 <AiFillEdit className="text-3xl rounded hover:cursor-pointer hover:text-blue-500 btn-icon transition-colors p-1" onClick={editHandler} />
                                 <AiFillDelete className="text-3xl rounded hover:cursor-pointer hover:text-blue-500 btn-icon transition-colors p-1" onClick={deleteHandler} />
                             </div>}
-                            <BsBookmarkPlusFill className="text-3xl rounded btn-icon hover:cursor-pointer hover:text-blue-500 transition-colors p-1" />
+
+                            {/* Checking of already bookmarked by user */}
+                            {
+                                isAlreadyBookmarkedByUser ?
+                                    <BsBookmarkCheckFill className="text-3xl rounded btn-icon hover:cursor-pointer hover:text-blue-500 transition-colors p-1" onClick={bookmarkHandler} />
+                                    :
+                                    <BsBookmarkPlusFill className="text-3xl rounded btn-icon hover:cursor-pointer hover:text-blue-500 transition-colors p-1" onClick={bookmarkHandler} />
+                            }
                         </div>
                     </div>
                 </div>

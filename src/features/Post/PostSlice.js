@@ -8,11 +8,14 @@ import {
 	deleteUserPostService,
 	likePostService,
 	dislikePostService,
+	addToBookmarkService,
+	removeFromBookmarkService,
 } from "../../services/PostService";
 
 const initialState = {
 	allPosts: [],
 	posts: [],
+	bookmarkedPost: [],
 	loading: false,
 	postModal: false,
 };
@@ -71,7 +74,6 @@ export const deleteUserPost = createAsyncThunk(
 export const likePost = createAsyncThunk(
 	"posts/likePost",
 	async ({ postID, authToken }, { rejectWithValue }) => {
-		console.log("authToken: ", authToken);
 		try {
 			return await likePostService(postID, authToken);
 		} catch (error) {
@@ -87,6 +89,32 @@ export const dislikePost = createAsyncThunk(
 		console.log("authToken: ", authToken);
 		try {
 			return await dislikePostService(postID, authToken);
+		} catch (error) {
+			return rejectWithValue(error);
+		}
+	},
+);
+
+// Add to bookmark post
+export const addToBookmark = createAsyncThunk(
+	"posts/addToBookmark",
+	async ({ postID, authToken }, { rejectWithValue }) => {
+		console.log("authToken: ", authToken);
+		try {
+			return await addToBookmarkService(postID, authToken);
+		} catch (error) {
+			return rejectWithValue(error);
+		}
+	},
+);
+
+// Remove from bookmark post
+export const removeFromBookmark = createAsyncThunk(
+	"posts/removeFromBookmark",
+	async ({ postID, authToken }, { rejectWithValue }) => {
+		console.log("authToken: ", authToken);
+		try {
+			return await removeFromBookmarkService(postID, authToken);
 		} catch (error) {
 			return rejectWithValue(error);
 		}
@@ -193,6 +221,31 @@ export const postSlice = createSlice({
 			console.log("action: ", action);
 			state.loading = false;
 			toast.error("Some error occured while Disliking posts.");
+		},
+
+		// ! Add to bookmark reducer here
+		[addToBookmark.fulfilled]: (state, action) => {
+			console.log("action: ", action);
+			state.loading = false;
+			state.bookmarkedPost = action.payload?.data?.bookmarks;
+			toast.success("Added to bookmark.");
+		},
+		[addToBookmark.rejected]: (state, action) => {
+			console.log("action: ", action);
+			state.loading = false;
+			toast.error("Error occured while adding to bookmark.");
+		},
+
+		// ! Remove from bookmark reducer here
+		[removeFromBookmark.fulfilled]: (state, { payload }) => {
+			state.loading = false;
+			state.bookmarkedPost = payload?.data?.bookmarks;
+			toast.success("Removed from bookmark.");
+		},
+		[removeFromBookmark.rejected]: (state, action) => {
+			console.log("action: ", action);
+			state.loading = false;
+			toast.error("Error occured while removing from bookmark.");
 		},
 
 		// ! Single user post reducer headers
