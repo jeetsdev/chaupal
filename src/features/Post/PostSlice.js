@@ -3,7 +3,6 @@ import toast from "react-hot-toast";
 import {
 	createNewPostService,
 	getAllPostService,
-	getUserPostService,
 	updateUserPostService,
 	deleteUserPostService,
 	likePostService,

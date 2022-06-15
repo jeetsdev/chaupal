@@ -1,8 +1,6 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { loaderImg } from "../../assets";
 import { Footer, Header, NewPostCard, PostCard, Sidebar, WhoToFollowCard } from "../../components"
-import { getAllPost } from "../../features/Post/PostSlice";
 import "./Home.css";
 
 export const Home = () => {

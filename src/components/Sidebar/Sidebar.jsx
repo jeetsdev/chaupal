@@ -3,7 +3,7 @@ import { MdExplore } from "react-icons/md"
 import { BsFillBookmarkFill } from "react-icons/bs"
 import { FaUserCircle } from "react-icons/fa"
 import { Sidemenu } from "./Sidemenu"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { toggleNewPostModal } from "../../features/Post/PostSlice"
 
 
@@ -24,7 +24,7 @@ export const Sidebar = () => {
 
             {/* Sidebar buttons  */}
             <section className="flex justify-center items-center">
-                <button className="py-1 px-4 w-full mt-8 rounded btn-primary text-lg font-bold text-center"  onClick={()=>dispatch(toggleNewPostModal())}>Create New Post</button>
+                <button className="py-1 px-4 w-full mt-8 rounded btn-primary text-lg font-bold text-center" onClick={() => dispatch(toggleNewPostModal())}>Create New Post</button>
             </section>
         </main>
     )
