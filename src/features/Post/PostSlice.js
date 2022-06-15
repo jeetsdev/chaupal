@@ -36,7 +36,6 @@ export const getAllPost = createAsyncThunk(
 export const createNewPost = createAsyncThunk(
 	"posts/createNewPost",
 	async ({ postData, authToken }, { rejectWithValue }) => {
-		console.log("authToken: ", authToken);
 		try {
 			return await createNewPostService(postData, authToken);
 		} catch (error) {
@@ -49,7 +48,6 @@ export const createNewPost = createAsyncThunk(
 export const updateUserPost = createAsyncThunk(
 	"posts/updateUserPost",
 	async ({ postID, postData, authToken }, { rejectWithValue }) => {
-		console.log("authToken: ", authToken);
 		try {
 			return await updateUserPostService(postID, postData, authToken);
 		} catch (error) {
@@ -86,7 +84,6 @@ export const likePost = createAsyncThunk(
 export const dislikePost = createAsyncThunk(
 	"posts/dislikePost",
 	async ({ postID, authToken }, { rejectWithValue }) => {
-		console.log("authToken: ", authToken);
 		try {
 			return await dislikePostService(postID, authToken);
 		} catch (error) {
@@ -99,7 +96,6 @@ export const dislikePost = createAsyncThunk(
 export const addToBookmark = createAsyncThunk(
 	"posts/addToBookmark",
 	async ({ postID, authToken }, { rejectWithValue }) => {
-		console.log("authToken: ", authToken);
 		try {
 			return await addToBookmarkService(postID, authToken);
 		} catch (error) {
@@ -112,21 +108,8 @@ export const addToBookmark = createAsyncThunk(
 export const removeFromBookmark = createAsyncThunk(
 	"posts/removeFromBookmark",
 	async ({ postID, authToken }, { rejectWithValue }) => {
-		console.log("authToken: ", authToken);
 		try {
 			return await removeFromBookmarkService(postID, authToken);
-		} catch (error) {
-			return rejectWithValue(error);
-		}
-	},
-);
-
-// Get specific user posts here
-export const getUserPost = createAsyncThunk(
-	"posts/getUserPost",
-	async (username, { rejectWithValue }) => {
-		try {
-			return await getUserPostService();
 		} catch (error) {
 			return rejectWithValue(error);
 		}
@@ -165,7 +148,6 @@ export const postSlice = createSlice({
 			toast.success("Posted successfully.");
 		},
 		[createNewPost.rejected]: (state, action) => {
-			console.log("action: ", action);
 			state.loading = false;
 			toast.error("Some error occured while creating posts.");
 		},
@@ -194,7 +176,6 @@ export const postSlice = createSlice({
 			toast.success("Deleted successfully.");
 		},
 		[deleteUserPost.rejected]: (state, action) => {
-			console.log("action: ", action);
 			state.loading = false;
 			toast.error("Some error occured while deleting posts.");
 		},
@@ -206,7 +187,6 @@ export const postSlice = createSlice({
 			toast.success("Liked successfully.");
 		},
 		[likePost.rejected]: (state, action) => {
-			console.log("action: ", action);
 			state.loading = false;
 			toast.error("Some error occured while Liking posts.");
 		},
@@ -218,20 +198,17 @@ export const postSlice = createSlice({
 			toast.success("Removed from likes.");
 		},
 		[dislikePost.rejected]: (state, action) => {
-			console.log("action: ", action);
 			state.loading = false;
 			toast.error("Some error occured while Disliking posts.");
 		},
 
 		// ! Add to bookmark reducer here
 		[addToBookmark.fulfilled]: (state, action) => {
-			console.log("action: ", action);
 			state.loading = false;
 			state.bookmarkedPost = action.payload?.data?.bookmarks;
 			toast.success("Added to bookmark.");
 		},
 		[addToBookmark.rejected]: (state, action) => {
-			console.log("action: ", action);
 			state.loading = false;
 			toast.error("Error occured while adding to bookmark.");
 		},
@@ -243,22 +220,8 @@ export const postSlice = createSlice({
 			toast.success("Removed from bookmark.");
 		},
 		[removeFromBookmark.rejected]: (state, action) => {
-			console.log("action: ", action);
 			state.loading = false;
 			toast.error("Error occured while removing from bookmark.");
-		},
-
-		// ! Single user post reducer headers
-		[getUserPost.pending]: (state) => {
-			state.loading = true;
-		},
-		[getUserPost.fulfilled]: (state, action) => {
-			state.loading = false;
-			// state.allPosts = payload?.data?.posts;
-		},
-		[getUserPost.rejected]: (state, action) => {
-			state.loading = false;
-			toast.error("Some error occured while fetching posts.");
 		},
 	},
 });

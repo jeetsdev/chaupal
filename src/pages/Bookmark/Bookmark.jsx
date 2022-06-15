@@ -23,7 +23,7 @@ export const Bookmark = () => {
                         bookmarkedPost?.length === 0 ?
                             <div className="flex justify-center items-center flex-col mt-10">
                                 <img src={noPostImg} alt="no post here" className="w-1/2" />
-                                <p className="text-xl font-bold mt-10">No post</p>
+                                <p className="text-xl font-bold mt-10">No post.</p>
                             </div>
                             :
                             <div>

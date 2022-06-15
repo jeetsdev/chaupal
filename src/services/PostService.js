@@ -74,6 +74,3 @@ export const removeFromBookmarkService = (postID, authToken) => {
 	);
 };
 
-export const getUserPostService = (username) => {
-	return axios.get(`/api/posts/user/${username}`);
-};

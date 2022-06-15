@@ -14,7 +14,8 @@
 	--primary-hover-color: #49279d;
 	--primary-transparent-color: #a8a7a97c;
 	--font-color: #ffffff;
-	--primary-bg-color: hsl(264, 10%, 95%);
+	--primary-bg-color: #f3f2f5;
+	--post-hover-color:#dededf;
 }
 
 body {
@@ -66,7 +67,6 @@ body {
 }
 
 .btn-icon {
-	background-color: var(--primary-bg-color);
 	transition: transform 0.4s ease-in-out;
 }
 
