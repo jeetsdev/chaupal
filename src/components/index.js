@@ -1,3 +1,4 @@
+export { NewPostModal } from "./Modals/NewPostModal";
 export { Sidebar } from "./Sidebar/Sidebar";
 export { NewPostCard } from "./Cards/NewPost/NewPostCard";
 export { Header } from "./Header/Header";
@@ -11,3 +12,4 @@ export { OtherProfileCard } from "./Cards/Profile/OtherProfileCard";
 export { RequireAuth } from "./Auth/RequireAuth";
 export { NotRequireAuth } from "./Auth/NotRequireAuth";
 export { MyToast } from "./MyToast/MyToast";
+export { SinglePostCard } from "./Cards/SinglePost/SinglePostCard";

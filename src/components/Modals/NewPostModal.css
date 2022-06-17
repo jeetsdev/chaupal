@@ -1,0 +1,16 @@
+
+.new-post-modal{
+    left: 25%;
+    width: 50%;
+    min-height: 40vh;
+}
+.post-modal-active {
+	transform: translateY(0vh);
+	transform-origin: right;
+	transition: transform .4s ease-in-out;
+}
+.post-modal-hide {
+    transform: translateY(-100vh);
+    transition: transform .4s ease-in-out;
+	transform-origin: right;
+}

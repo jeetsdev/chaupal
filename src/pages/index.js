@@ -6,3 +6,4 @@ export { Bookmark } from "./Bookmark/Bookmark";
 export { Profile } from "./Profile/Profile";
 export { Login } from "./Auth/Login";
 export { SignUp } from "./Auth/SignUp";
+export { Post } from "./Post/Post";

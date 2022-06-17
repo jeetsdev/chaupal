@@ -1,7 +1,18 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { ExploreBar, Footer, Header, PostCard, Sidebar, WhoToFollowCard } from "../../components"
+import { getAllPost } from "../../features/Post/PostSlice";
 import "./Explore.css"
 
 export const Explore = () => {
+
+    const dispatch = useDispatch();
+    const { allPosts } = useSelector(state => state.post);
+    useEffect(() => {
+        dispatch(getAllPost());
+    }, [dispatch])
+
+
     return (
         <main className="main-container">
             <Header />
@@ -14,10 +25,9 @@ export const Explore = () => {
                         <ExploreBar />
                     </div>
                     <div>
-                        <PostCard />
-                        <PostCard />
-                        <PostCard />
-                        <PostCard />
+                        {allPosts?.map(post => {
+                            return <PostCard post={post} key={post._id} />
+                        })}
                     </div>
                 </section>
                 <section className="right-container fixed">
