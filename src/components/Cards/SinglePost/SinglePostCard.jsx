@@ -1,18 +1,25 @@
 import { BsHeart, BsHeartFill, BsBookmarkPlusFill, BsBookmarkCheckFill, BsThreeDotsVertical, BsChatDots } from "react-icons/bs"
 import { AiFillEdit, AiFillDelete } from "react-icons/ai"
 import { useDispatch, useSelector } from "react-redux"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { EditPostModal } from "../../Modals/EditPostModal"
 import { addToBookmark, deleteUserPost, dislikePost, likePost } from "../../../features/Post/PostSlice"
 import toast from "react-hot-toast"
 import { CommentCard } from "../Comment/CommentCard"
+import { addComment, getAllComment } from "../../../features/Commnets/CommentSlice";
+import { loaderImg } from "../../../assets";
 
 export const SinglePostCard = ({ post }) => {
 
     const { userData: { username }, authToken } = useSelector(state => state.auth);
     const { bookmarkedPost } = useSelector(state => state.post);
+    const { postComments, loading } = useSelector(state => state.comment);
+
     const [postMenu, setPostMenu] = useState(false);
     const [editModal, setEditModal] = useState(false);
+    const [commentFormData, setCommentFormData] = useState({
+        comment: "",
+    });
     const dispatch = useDispatch();
     const isAlreadyLikedByUser = post?.likes?.likedBy.some(user => user.username === username);
     const isAlreadyBookmarkedByUser = bookmarkedPost.some(eachPost => eachPost._id === post._id);
@@ -49,6 +56,21 @@ export const SinglePostCard = ({ post }) => {
         event.stopPropagation();
         dispatch(dislikePost({ postID: post._id, authToken }));
     }
+
+    const commentSubmitHandler = (event) => {
+        event.preventDefault()
+        dispatch(addComment({
+            postID: post?._id,
+            commentData: commentFormData,
+            authToken: authToken,
+        }))
+        setCommentFormData({ ...commentFormData, comment: "" })
+    }
+
+    // Fetching all comments here 
+    useEffect(() => {
+        dispatch(getAllComment({ postID: post?._id }));
+    }, [dispatch, post?._id])
 
     return (
         <main className="hover:cursor-pointer flex flex-col g-secondary p-4 mx-8 bg-white my-2 rounded z-10">
@@ -107,21 +129,28 @@ export const SinglePostCard = ({ post }) => {
                     </div>
                 </section>
             </section>
-            <section className="mt-10">
-                <p className="font-bold">Comments : </p>
-                <div className="mt-5">
-                    {
-                        post?.comments?.map(comment => {
-                            return <CommentCard comment={comment} />
-                        })
-                    }
-                </div>
-                <div className="mt-10">
-                    <form action="" className="flex w-full">
-                        <input type="text" className="w-full border-2 p-1 outline-none rounded" placeholder="Add your comments here..." />
-                        <button className="btn-primary rounded ml-2 p-2">Comment</button>
-                    </form>
-                </div>
+            <section className="mt-10 relative">
+                {loading ?
+                    <div className="absolute max-h-3/5  top-0 bottom-0 z-10 rounded right-0 left-0 flex justify-center items-center ">
+                        <img src={loaderImg} alt="loader here" />
+                    </div>
+                    :
+                    <div>
+                        <p className="font-bold">Comments : </p>
+                        <div className="mt-5">
+                            {
+                                postComments?.map(comment => {
+                                    return <CommentCard comment={comment} />
+                                })
+                            }
+                        </div>
+                        <div className="mt-10">
+                            <form action="" className="flex w-full" onSubmit={commentSubmitHandler}>
+                                <input type="text" className="w-full border-2 p-1 outline-none rounded" placeholder="Add your comments here..." value={commentFormData.comment} onChange={(event) => setCommentFormData({ ...commentFormData, comment: event.target.value })} />
+                                <button className="btn-primary rounded ml-2 p-2">Comment</button>
+                            </form>
+                        </div>
+                    </div>}
             </section>
         </main>
     )
