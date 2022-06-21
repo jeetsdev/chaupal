@@ -67,9 +67,6 @@ export const commentSlice = createSlice({
 		},
 
 		//! Add new comment reducers here
-		[addComment.pending]: (state, action) => {
-			state.loading = true;
-		},
 		[addComment.fulfilled]: (state, { meta, payload }) => {
 			state.loading = false;
 			const currentPost = payload?.data?.posts?.filter(

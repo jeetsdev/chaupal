@@ -59,13 +59,18 @@ export const SinglePostCard = ({ post }) => {
 
     const commentSubmitHandler = (event) => {
         event.preventDefault()
-        dispatch(addComment({
-            postID: post?._id,
-            commentData: commentFormData,
-            authToken: authToken,
-        }))
-        dispatch(getAllPost());
-        setCommentFormData({ ...commentFormData, comment: "" })
+        if (commentFormData.comment !== "" && (commentFormData.comment).trim() !== "") {
+            dispatch(addComment({
+                postID: post?._id,
+                commentData: commentFormData,
+                authToken: authToken,
+            }))
+            dispatch(getAllPost());
+            setCommentFormData({ ...commentFormData, comment: "" })
+        }
+        else {
+            toast.error("Enter some text first");
+        }
     }
 
     // Fetching all comments here 
