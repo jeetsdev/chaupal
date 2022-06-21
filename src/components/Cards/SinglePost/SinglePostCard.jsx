@@ -73,7 +73,7 @@ export const SinglePostCard = ({ post }) => {
     }, [dispatch, post?._id])
 
     return (
-        <main className="hover:cursor-pointer flex flex-col g-secondary p-4 mx-8 bg-white my-2 rounded z-10">
+        <main className="flex flex-col g-secondary p-4 mx-8 bg-white my-2 rounded z-10">
             <EditPostModal editModal={editModal} post={post} setEditModal={setEditModal} />
             <section className="flex">
                 <section>
@@ -140,7 +140,7 @@ export const SinglePostCard = ({ post }) => {
                         <div className="mt-5">
                             {
                                 postComments?.map(comment => {
-                                    return <CommentCard comment={comment} />
+                                    return <CommentCard comment={comment} postID={post?._id} />
                                 })
                             }
                         </div>

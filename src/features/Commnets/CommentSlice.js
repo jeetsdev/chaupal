@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 import {
 	addCommentService,
+	deleteCommentService,
 	getAllCommentService,
 } from "../../services/commentService";
 
@@ -22,12 +23,24 @@ export const getAllComment = createAsyncThunk(
 	},
 );
 
-// Get all post here
+// Add a comment on post here
 export const addComment = createAsyncThunk(
 	"posts/addComment",
 	async ({ postID, commentData, authToken }, { rejectWithValue }) => {
 		try {
 			return await addCommentService(postID, commentData, authToken);
+		} catch (error) {
+			return rejectWithValue(error);
+		}
+	},
+);
+
+// Get all post here
+export const deleteComment = createAsyncThunk(
+	"posts/deleteComment",
+	async ({ postID, commentID, authToken }, { rejectWithValue }) => {
+		try {
+			return await deleteCommentService(postID, commentID, authToken);
 		} catch (error) {
 			return rejectWithValue(error);
 		}
@@ -68,6 +81,19 @@ export const commentSlice = createSlice({
 		[addComment.rejected]: (state, action) => {
 			state.loading = false;
 			toast.error("Some error occured while addding comments.");
+		},
+
+		[deleteComment.pending]: (state, action) => {
+			state.loading = true;
+		},
+		[deleteComment.fulfilled]: (state, {payload}) => {
+			state.loading = false;
+			state.postComments = payload?.data?.comments;
+			toast.success("Comment deleted.");
+		},
+		[deleteComment.rejected]: (state, action) => {
+			state.loading = false;
+			toast.error("Some error occured while deleting comments.");
 		},
 	},
 });

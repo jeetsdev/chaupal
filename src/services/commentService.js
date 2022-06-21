@@ -15,3 +15,14 @@ export const addCommentService = (postID, commentData, authToken) => {
 		},
 	);
 };
+
+//! Defined wrong on mockbee docs...
+export const deleteCommentService = (postID, commentID, authToken) => {
+	return axios.post(
+		`/api/comments/delete/${postID}/${commentID}`,
+		{},
+		{
+			headers: { authorization: authToken },
+		},
+	);
+};

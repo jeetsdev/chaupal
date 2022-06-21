@@ -1,9 +1,20 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { MdDelete, MdModeEditOutline } from "react-icons/md"
+import { deleteComment } from '../../../features/Commnets/CommentSlice';
 
-export const CommentCard = ({ comment }) => {
+export const CommentCard = ({ comment, postID }) => {
 
-    const { userData: { fullName, avatar } } = useSelector(state => state.auth);
+    const { userData: { fullName, avatar, username }, authToken } = useSelector(state => state.auth);
+    const dispatch = useDispatch();
+
+    const deleteCommentHandler = () => {
+        dispatch(deleteComment({
+            postID: postID,
+            commentID: comment?._id,
+            authToken: authToken
+        }))
+    }
 
     return (
         <main className='flex mt-2'>
@@ -21,6 +32,10 @@ export const CommentCard = ({ comment }) => {
                     </p>
                 </div>
             </section>
+            {comment?.username === username && <section className='ml-auto flex items-end'>
+                <MdDelete className='text-xl mx-1 text-zinc-700 hover:cursor-pointer btn-icon' onClick={deleteCommentHandler}/>
+                <MdModeEditOutline className='text-xl mx-1 text-zinc-700 hover:cursor-pointer btn-icon' />
+            </section>}
         </main>
     )
 }
