@@ -3,7 +3,7 @@ import { AiFillEdit, AiFillDelete } from "react-icons/ai"
 import { useDispatch, useSelector } from "react-redux"
 import { useState, useEffect } from "react";
 import { EditPostModal } from "../../Modals/EditPostModal"
-import { addToBookmark, deleteUserPost, dislikePost, likePost } from "../../../features/Post/PostSlice"
+import { addToBookmark, deleteUserPost, dislikePost, getAllPost, likePost } from "../../../features/Post/PostSlice"
 import toast from "react-hot-toast"
 import { CommentCard } from "../Comment/CommentCard"
 import { addComment, getAllComment } from "../../../features/Commnets/CommentSlice";
@@ -64,6 +64,7 @@ export const SinglePostCard = ({ post }) => {
             commentData: commentFormData,
             authToken: authToken,
         }))
+        dispatch(getAllPost());
         setCommentFormData({ ...commentFormData, comment: "" })
     }
 
