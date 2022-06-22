@@ -16,7 +16,6 @@ export const EditPostModal = ({ editModal, post, setEditModal }) => {
     })
 
     const updatePostHandler = (event) => {
-        console.log('event: ', event);
         event.preventDefault();
         if (postData.content !== "") {
             dispatch(updateUserPost({ postID: post._id, postData, authToken }));

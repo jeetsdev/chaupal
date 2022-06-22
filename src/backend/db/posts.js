@@ -17,7 +17,7 @@ export const posts = [
 			likedBy: [],
 			dislikedBy: [],
 		},
-		username: "chaupal1",
+		username: "chaupal",
 		avatar: chaupalAvatar,
 		fullName: "Chaupal",
 		createdAt: formatDate(),
@@ -52,7 +52,7 @@ export const posts = [
 			likedBy: [],
 			dislikedBy: [],
 		},
-		username: "chaupal1",
+		username: "chaupal",
 		avatar: chaupalAvatar,
 		fullName: "Chaupal",
 		comments: [
@@ -86,7 +86,7 @@ export const posts = [
 			likedBy: [],
 			dislikedBy: [],
 		},
-		username: "chaupal1",
+		username: "chaupal",
 		avatar: chaupalAvatar,
 		fullName: "Chaupal",
 		comments: [
@@ -135,7 +135,7 @@ export const posts = [
 		comments: [
 			{
 				_id: uuid(),
-				username: "chaupal1",
+				username: "chaupal",
 				text: "Count me in...",
 				votes: {
 					upvotedBy: [],
@@ -179,7 +179,7 @@ export const posts = [
 			},
 			{
 				_id: uuid(),
-				username: "chaupal1",
+				username: "chaupal",
 				text: "Nothing to say...",
 				votes: {
 					upvotedBy: [],
@@ -213,7 +213,7 @@ export const posts = [
 		comments: [
 			{
 				_id: uuid(),
-				username: "chaupal1",
+				username: "chaupal",
 				text: "Best that you can do for yourself...",
 				votes: {
 					upvotedBy: [],

@@ -80,9 +80,6 @@ export const commentSlice = createSlice({
 			toast.error("Some error occured while addding comments.");
 		},
 
-		[deleteComment.pending]: (state, action) => {
-			state.loading = true;
-		},
 		[deleteComment.fulfilled]: (state, {payload}) => {
 			state.loading = false;
 			state.postComments = payload?.data?.comments;

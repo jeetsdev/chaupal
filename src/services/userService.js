@@ -5,5 +5,5 @@ export const getAllUsersService = () => {
 };
 
 export const getCurrentUserService = (userId) => {
-	return axios.get(`/api/users/${userId}`);
+	return axios.get(`/api/users/${userId}`,{});
 };
