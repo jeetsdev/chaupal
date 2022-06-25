@@ -16,7 +16,7 @@ export const NewPostModal = () => {
     const [postData, setPostData] = useState({
         content: "",
     })
-    const currentPostUser = allUsers.find(user => user.username === userData.username);
+    const currentPostUser = allUsers.find(user => user?.username === userData?.username);
 
     const postSubmitHandler = (event) => {
         event.preventDefault();
