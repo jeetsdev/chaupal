@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom"
 export const PostCard = ({ post }) => {
 
     const { userData: { username }, authToken } = useSelector(state => state.auth);
+    const { allUsers } = useSelector(state => state.user);
     const { bookmarkedPost } = useSelector(state => state.post);
     const navigate = useNavigate();
     const [postMenu, setPostMenu] = useState(false);
@@ -19,6 +20,7 @@ export const PostCard = ({ post }) => {
     const isAlreadyLikedByUser = post?.likes?.likedBy.some(user => user.username === username);
     const isAlreadyBookmarkedByUser = bookmarkedPost.some(eachPost => eachPost._id === post._id);
 
+    const currentPostUser = allUsers.find(user => user.username === post.username);
     const editHandler = (event) => {
         event.stopPropagation();
         setEditModal(prev => !prev);
@@ -61,12 +63,12 @@ export const PostCard = ({ post }) => {
         <main className="hover:cursor-pointer post-card flex g-secondary p-4 mx-8 bg-white my-2 rounded z-10" onClick={() => postClickHandler(post._id)}>
             <EditPostModal editModal={editModal} post={post} setEditModal={setEditModal} />
             <section>
-                <img src={post?.avatar} alt="" className="w-10 h-10 mr-4 rounded-full object-cover border-2 p-px" />
+                <img src={currentPostUser?.avatar} alt="" className="w-10 h-10 mr-4 rounded-full object-cover border-2 p-px" />
             </section>
             <section className="w-full">
                 <div className="flex items-center mb-2">
-                    <p className="font-bold">{post?.fullName}</p>
-                    <p className="text-xs text-gray-600 mx-2">@{post?.username}</p>
+                    <p className="font-bold">{currentPostUser?.fullName}</p>
+                    <p className="text-xs text-gray-600 mx-2">@{currentPostUser?.username}</p>
                 </div>
                 <p className="my-4">
                     {post?.content}

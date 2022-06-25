@@ -13,3 +13,4 @@ export { RequireAuth } from "./Auth/RequireAuth";
 export { NotRequireAuth } from "./Auth/NotRequireAuth";
 export { MyToast } from "./MyToast/MyToast";
 export { SinglePostCard } from "./Cards/SinglePost/SinglePostCard";
+export { EditProfileModal } from "./Modals/EditProfileModal";

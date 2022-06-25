@@ -7,3 +7,16 @@ export const getAllUsersService = () => {
 export const getCurrentUserService = (userId) => {
 	return axios.get(`/api/users/${userId}`,{});
 };
+
+export const updateUserDataService = (userData, authToken) => {
+	return axios.post(
+		`/api/users/edit`,
+		{
+			userData: userData,
+		},
+		{
+			headers: { authorization: authToken },
+		},
+	);
+};
+

@@ -6,8 +6,11 @@ import { removeFromBookmark } from "../../../features/Post/PostSlice"
 export const BookmarkCard = ({ post }) => {
 
     const { authToken } = useSelector(state => state.auth);
+    const { allUsers } = useSelector(state => state.user);
     const [postMenu, setPostMenu] = useState(false);
     const dispatch = useDispatch();
+    const currentPostUser = allUsers.find(user => user.username === post.username);
+
 
     const bookmarkHandler = () => {
         dispatch(removeFromBookmark({ postID: post._id, authToken }));
@@ -17,12 +20,12 @@ export const BookmarkCard = ({ post }) => {
     return (
         <main className="flex g-secondary p-4 mx-8 bg-white my-2 rounded z-10">
             <section>
-                <img src={post?.avatar} alt="" className="w-10 h-10 mr-4 rounded-full object-cover border-2 p-px" />
+                <img src={currentPostUser?.avatar} alt="" className="w-10 h-10 mr-4 rounded-full object-cover border-2 p-px" />
             </section>
             <section className="w-full">
                 <div className="flex items-center mb-2">
-                    <p className="font-bold">{post?.fullName}</p>
-                    <p className="text-xs text-gray-600 mx-2">@{post?.username}</p>
+                    <p className="font-bold">{currentPostUser?.fullName}</p>
+                    <p className="text-xs text-gray-600 mx-2">@{currentPostUser?.username}</p>
                 </div>
                 <p className="my-4">
                     {post?.content}
