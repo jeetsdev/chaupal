@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import "./App.css";
 import { MyToast, NewPostModal } from "./components";
 import { getAllPost } from "./features/Post/PostSlice";
+import { getAllUsers } from "./features/User/UserSlice";
 import { NavigationRoutes } from "./routes/NavigationRoutes";
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
 
 	useEffect(() => {
 		dispatch(getAllPost());
+		dispatch(getAllUsers());
 	}, [dispatch]);
 
 	return (

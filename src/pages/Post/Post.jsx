@@ -9,7 +9,6 @@ export const Post = () => {
     const { allPosts, loading } = useSelector(state => state.post);
     const { postID } = useParams();
     const currentPost = allPosts.find(post => post._id === postID);
-    console.log('currentPost: ', currentPost);
 
     // Scrolling to top here
     useEffect(() => {

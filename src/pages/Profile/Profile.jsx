@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Footer, Header, PostCard, UserProfileCard, Sidebar, WhoToFollowCard } from "../../components"
 import { getAllPost } from "../../features/Post/PostSlice";
+import { getAllUsers } from "../../features/User/UserSlice";
 
 export const Profile = () => {
 
@@ -12,12 +13,12 @@ export const Profile = () => {
 
     // Getting all posts here
     useEffect(() => {
-        console.log("here in home");
         dispatch(getAllPost());
+        dispatch(getAllUsers());
     }, [dispatch])
 
     const currentUserPost = allPosts?.filter(post => post.username === username);
-    console.log('currentUserPost: ', currentUserPost);
+
 
     return (
         <main className="main-container">

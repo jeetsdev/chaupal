@@ -37,7 +37,7 @@ export const Login = () => {
     const testCredentialHandler = () => {
         setloginFormData({
             ...loginFormData,
-            username: "chaupal1",
+            username: "chaupal",
             password: "chaupal@123",
         })
     }

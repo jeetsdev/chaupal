@@ -5,7 +5,7 @@ import { BookmarkCard, Footer, Header, Sidebar, WhoToFollowCard } from "../../co
 export const Bookmark = () => {
 
     const { bookmarkedPost } = useSelector(state => state.post);
-    console.log('bookmarkedPost: ', bookmarkedPost);
+
 
     return (
         <main className="main-container">

@@ -10,11 +10,13 @@ import toast from "react-hot-toast"
 export const NewPostModal = () => {
 
     const { userData, authToken } = useSelector(state => state.auth);
+    const { allUsers } = useSelector(state => state.user);
     const { postModal } = useSelector(state => state.post);
     const dispatch = useDispatch();
     const [postData, setPostData] = useState({
         content: "",
     })
+    const currentPostUser = allUsers.find(user => user?.username === userData?.username);
 
     const postSubmitHandler = (event) => {
         event.preventDefault();
@@ -37,7 +39,7 @@ export const NewPostModal = () => {
                 </section>
                 <section className="w-full flex h-full  g-red-200">
                     <div className="flex-grow-0">
-                        <img src={userData?.avatar} alt="" className="w-10 h-10 rounded-full p-px border-2 object-cover mr-4" />
+                        <img src={currentPostUser?.avatar} alt="" className="w-10 h-10 rounded-full p-px border-2 object-cover mr-4" />
                     </div>
                     <form className="w-full  min-h-full" onSubmit={postSubmitHandler}>
                         <div className="min-h-full">
