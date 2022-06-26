@@ -30,7 +30,7 @@ export const NewPostCard = () => {
     return (
         <main className="flex rounded bg-white p-4 mx-8 my-6 relative">
             <section>
-                <img src={currentPostUser.avatar} alt="" className="w-10 h-10 rounded-full p-px border-2 object-cover mr-4" />
+                <img src={currentPostUser?.avatar} alt="" className="w-10 h-10 rounded-full p-px border-2 object-cover mr-4" />
             </section>
             <form className="w-full" onSubmit={postSubmitHandler}>
                 <div>
