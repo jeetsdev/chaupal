@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 import {
+	followUserService,
 	getAllUsersService,
 	getCurrentUserService,
 	updateUserDataService,
@@ -36,12 +37,24 @@ export const getCurrentUser = createAsyncThunk(
 	},
 );
 
-// Axctive user here
+// Update user data here
 export const updateUserData = createAsyncThunk(
 	"posts/updateUserData",
 	async ({ userData, authToken }, { rejectWithValue }) => {
 		try {
 			return await updateUserDataService(userData, authToken);
+		} catch (error) {
+			return rejectWithValue(error);
+		}
+	},
+);
+
+// Follow user  here
+export const followUser = createAsyncThunk(
+	"posts/followUser",
+	async ({ followUserID, authToken }, { rejectWithValue }) => {
+		try {
+			return await followUserService(followUserID, authToken);
 		} catch (error) {
 			return rejectWithValue(error);
 		}
@@ -100,7 +113,32 @@ export const userSlice = createSlice({
 		},
 		[updateUserData.rejected]: (state, action) => {
 			state.loading = false;
-			toast.error("Some error occured getting users.");
+			toast.error("Some error occured updating users.");
+		},
+
+		// ! Follow user reducer here
+		[followUser.pending]: (state) => {
+			state.loading = true;
+		},
+		[followUser.fulfilled]: (state, action) => {
+			console.log("action: ", action);
+			state.loading = false;
+			const updatedUserData = action.payload?.data?.user;
+
+			const updatedUsers = state?.allUsers?.map((user) => {
+				if (user.username === updatedUserData?.username) {
+					return updatedUserData;
+				} else {
+					return user;
+				}
+			});
+			state.allUsers = updatedUsers;
+			toast.success("User followed.");
+		},
+		[followUser.rejected]: (state, action) => {
+			console.log("action: ", action);
+			state.loading = false;
+			toast.error("Some error occured at following user.");
 		},
 	},
 });

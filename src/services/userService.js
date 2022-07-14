@@ -5,7 +5,7 @@ export const getAllUsersService = () => {
 };
 
 export const getCurrentUserService = (userId) => {
-	return axios.get(`/api/users/${userId}`,{});
+	return axios.get(`/api/users/${userId}`, {});
 };
 
 export const updateUserDataService = (userData, authToken) => {
@@ -20,3 +20,12 @@ export const updateUserDataService = (userData, authToken) => {
 	);
 };
 
+export const followUserService = (followUserID, authToken) => {
+	return axios.post(
+		`/api/users/follow/${followUserID}`,
+		{},
+		{
+			headers: { authorization: authToken },
+		},
+	);
+};
