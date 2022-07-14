@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { EditProfileModal } from "../../Modals/EditProfileModal";
+import { FollowingModal } from "../../Modals/FollowingModal";
 
 export const UserProfileCard = () => {
 
@@ -8,15 +9,21 @@ export const UserProfileCard = () => {
     const { allUsers } = useSelector(state => state.user);
     const activeUser = allUsers.find(user => user.username === userData.username)
     const [editProfileModal, setEditProfileModal] = useState(false);
+    const [followingModal, setFollowingModal] = useState(false);
 
     const editProfileHandler = (event) => {
         event.stopPropagation();
         setEditProfileModal(prev => !prev);
     }
+    const followingHandler = (event) => {
+        event.stopPropagation();
+        setFollowingModal(prev => !prev);
+    }
 
     return (
         <main className="flex flex-col mx-8 my-2 rounded bg-white p-4">
             <EditProfileModal editProfileModal={editProfileModal} userData={activeUser} setEditProfileModal={setEditProfileModal} />
+            <FollowingModal followingModal={followingModal} userData={activeUser} setFollowingModal={setFollowingModal} />
             <section className="flex flex-col gap-2 items-center justify-center">
                 <img src={activeUser?.avatar} alt="" className="w-20 h-20 rounded-full object-cover border-2 p-px" />
                 <p className="text-2xl font-bold font-primary">{activeUser?.fullName}</p>
@@ -27,7 +34,7 @@ export const UserProfileCard = () => {
             </section>
             <section className="flex justify-center my-2">
                 <p className="px-2 py-1 btn-primary-outline border-2 m-2 rounded hover:cursor-pointer">{activeUser?.followers?.length} Followers</p>
-                <p className="px-2 py-1 btn-primary-outline border-2 m-2 rounded hover:cursor-pointer">{activeUser?.following?.length} Following</p>
+                <p className="px-2 py-1 btn-primary-outline border-2 m-2 rounded hover:cursor-pointer" onClick={followingHandler}>{activeUser?.following?.length} Following</p>
             </section>
         </main>
     )

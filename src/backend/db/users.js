@@ -49,7 +49,7 @@ export const users = [
 		createdAt: formatDate(),
 		updatedAt: formatDate(),
 		followers: [
-			{ _id: uuid(), username: "jeetsdev", fullName: "Jeet" },
+			{ _id: uuid(), username: "jeetsdev" },
 			{ _id: uuid(), username: "adii" },
 			{ _id: uuid(), username: "tony" },
 			{ _id: uuid(), username: "ninja" },
