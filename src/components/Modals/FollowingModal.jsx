@@ -9,12 +9,12 @@ export const FollowingModal = ({ setFollowingModal, followingModal, userData }) 
                 <section>
                     {userData?.following?.length === 0 ?
                         <div className="flex py-2">
-                            <p>No followings...</p>
+                            <p>No Followings...</p>
                         </div>
                         :
-                        <div className="flex flex-col gap-6" >
+                        <div className="flex flex-col gap-6 pb-2" >
                             {userData?.following?.map(following => {
-                                return <div className='flex items-center my-2  border-gray-400  rounded'>
+                                return <div className='flex items-center border-gray-400  rounded'>
                                     <section>
                                         <img src={following?.avatar} alt="" className='w-10 h-10 mr-4 rounded-full object-cover border-2 p-px' />
                                     </section>
