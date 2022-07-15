@@ -15,7 +15,7 @@ export const FollowersModal = ({ setFollowersModal, followersModal, userData }) 
                         :
                         <div className="flex flex-col gap-6 pb-2" >
                             {userData?.followers?.map(follower => {
-                                return <div className='flex items-center border-gray-400  rounded'>
+                                return <div className='flex items-center border-gray-400  rounded' key={follower._id}>
                                     <section>
                                         <img src={follower?.avatar} alt="" className='w-10 h-10 mr-4 rounded-full object-cover border-2 p-px' />
                                     </section>

@@ -1,4 +1,15 @@
+import { useDispatch, useSelector } from "react-redux"
+import { unfollowUser } from "../../features/User/UserSlice";
+
+
 export const FollowingModal = ({ setFollowingModal, followingModal, userData }) => {
+
+    const dispatch = useDispatch();
+    const { authToken } = useSelector(state => state.auth);
+
+    const unfollowUserHandler = (userId) => {
+        dispatch(unfollowUser({ unfollowUserID: userId, authToken: authToken }))
+    }
     return (
         <main className={`fixed flex justify-center items-center left-0 right-0 bottom-0 top-0 bg-transparent z-20 ` + (followingModal ? " post-modal-active" : " post-modal-hide")} onClick={() => setFollowingModal(prev => !prev)}>
             <div className={`new-post-modal bg-white flex flex-col fixed rounded z-20 px-4` + (followingModal ? " post-modal-active" : " post-modal-hide")} onClick={(e) => { e.stopPropagation() }}>
@@ -14,7 +25,7 @@ export const FollowingModal = ({ setFollowingModal, followingModal, userData }) 
                         :
                         <div className="flex flex-col gap-6 pb-2" >
                             {userData?.following?.map(following => {
-                                return <div className='flex items-center border-gray-400  rounded'>
+                                return <div className='flex items-center border-gray-400 rounded' key={following._id}>
                                     <section>
                                         <img src={following?.avatar} alt="" className='w-10 h-10 mr-4 rounded-full object-cover border-2 p-px' />
                                     </section>
@@ -22,7 +33,7 @@ export const FollowingModal = ({ setFollowingModal, followingModal, userData }) 
                                         <p className='font-bold'>{following?.fullName}</p>
                                         <p className='text-xs text-gray-600'>{following?.username}</p>
                                     </section>
-                                    <button className='text-primary underline hover:no-underline px-2 py-1 ml-auto rounded text-sm font-bold text-black' onClick={() => { }}>Unfollow - </button>
+                                    <button className='text-primary underline hover:no-underline px-2 py-1 ml-auto rounded text-sm font-bold text-black' onClick={()=>unfollowUserHandler(following._id)}>Unfollow - </button>
                                 </div>
                             })}
                         </div>}

@@ -4,6 +4,7 @@ import {
 	followUserService,
 	getAllUsersService,
 	getCurrentUserService,
+	unfollowUserService,
 	updateUserDataService,
 } from "../../services/userService";
 
@@ -61,6 +62,18 @@ export const followUser = createAsyncThunk(
 	},
 );
 
+// Unfollow user  here
+export const unfollowUser = createAsyncThunk(
+	"posts/unfollowUser",
+	async ({ unfollowUserID, authToken }, { rejectWithValue }) => {
+		try {
+			return await unfollowUserService(unfollowUserID, authToken);
+		} catch (error) {
+			return rejectWithValue(error);
+		}
+	},
+);
+
 export const userSlice = createSlice({
 	name: "posts",
 	initialState,
@@ -93,7 +106,7 @@ export const userSlice = createSlice({
 			toast.error("Some error occured getting users.");
 		},
 
-		//! All users reducer here
+		//! Update user reducer here
 		[updateUserData.pending]: (state) => {
 			state.loading = true;
 		},
@@ -139,6 +152,31 @@ export const userSlice = createSlice({
 			console.log("action: ", action);
 			state.loading = false;
 			toast.error("Some error occured at following user.");
+		},
+
+		// ! Unfollow user reducer here
+		[unfollowUser.pending]: (state) => {
+			state.loading = true;
+		},
+		[unfollowUser.fulfilled]: (state, action) => {
+			console.log("action: ", action);
+			state.loading = false;
+			const updatedUserData = action.payload?.data?.user;
+
+			const updatedUsers = state?.allUsers?.map((user) => {
+				if (user.username === updatedUserData?.username) {
+					return updatedUserData;
+				} else {
+					return user;
+				}
+			});
+			state.allUsers = updatedUsers;
+			toast.success("User unfollowed.");
+		},
+		[unfollowUser.rejected]: (state, action) => {
+			console.log("action: ", action);
+			state.loading = false;
+			toast.error("Some error occured at unfollowing user.");
 		},
 	},
 });

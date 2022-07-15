@@ -29,3 +29,13 @@ export const followUserService = (followUserID, authToken) => {
 		},
 	);
 };
+
+export const unfollowUserService = (unfollowUserID, authToken) => {
+	return axios.post(
+		`/api/users/unfollow/${unfollowUserID}`,
+		{},
+		{
+			headers: { authorization: authToken },
+		},
+	);
+};
