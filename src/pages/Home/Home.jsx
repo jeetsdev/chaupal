@@ -6,7 +6,14 @@ import "./Home.css";
 export const Home = () => {
 
     const { allPosts, loading } = useSelector(state => state.post);
+    const { userData } = useSelector(state => state.auth);
+    const { allUsers } = useSelector(state => state.user);
+    const activeUser = allUsers.find(user => user?.username === userData?.username);
 
+    // Getting all post from user and followings here
+    const feedPost = allPosts?.filter(eachPost => {
+        return activeUser?.following?.find(eachFollowing => eachFollowing.username === eachPost.username) || activeUser?.username === eachPost.username;
+    })
 
     return (
         <main className="main-container">
@@ -29,7 +36,7 @@ export const Home = () => {
                             <button className="mr-4 underline text-primary hover:no-underline hover:cursor-pointer">Trending</button>
                             <button className="underline text-primary hover:no-underline hover:cursor-pointer">Sort by Date</button>
                         </div>
-                        {allPosts?.map(post => {
+                        {feedPost?.map(post => {
                             return <PostCard post={post} key={post._id} />
                         })}
                     </div>
