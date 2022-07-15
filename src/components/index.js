@@ -15,3 +15,4 @@ export { MyToast } from "./MyToast/MyToast";
 export { SinglePostCard } from "./Cards/SinglePost/SinglePostCard";
 export { EditProfileModal } from "./Modals/EditProfileModal";
 export { FollowingModal } from "./Modals/FollowingModal";
+export { ScrollToTop } from "./ScrollToTop/ScrollToTop";

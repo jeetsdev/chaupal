@@ -1,5 +1,4 @@
 export const FollowersModal = ({ setFollowersModal, followersModal, userData }) => {
-    console.log('userData: ', userData);
     return (
         <main className={`fixed flex justify-center items-center left-0 right-0 bottom-0 top-0 bg-transparent z-20 ` + (followersModal ? " post-modal-active" : " post-modal-hide")} onClick={() => setFollowersModal(prev => !prev)}>
             <div className={`new-post-modal bg-white flex flex-col fixed rounded z-20 px-4` + (followersModal ? " post-modal-active" : " post-modal-hide")} onClick={(e) => { e.stopPropagation() }}>

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ExploreBar, Footer, Header, PostCard, Sidebar, WhoToFollowCard } from "../../components"
+import { ExploreBar, Footer, Header, PostCard, ScrollToTop, Sidebar, WhoToFollowCard } from "../../components"
 import { getAllPost } from "../../features/Post/PostSlice";
 import "./Explore.css"
 
@@ -15,6 +15,7 @@ export const Explore = () => {
 
     return (
         <main className="main-container">
+            <ScrollToTop />
             <Header />
             <section className="content-container grid">
                 <div className="left-container fixed ">

@@ -28,7 +28,6 @@ export const EditProfileModal = ({ editProfileModal, userData, setEditProfileMod
 
     const editProfileSubmitHandler = (event) => {
         event.preventDefault();
-        console.log("newUserData", newUserData);
         dispatch(updateUserData({
             userData: newUserData,
             authToken: authToken

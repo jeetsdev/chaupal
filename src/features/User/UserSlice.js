@@ -134,7 +134,6 @@ export const userSlice = createSlice({
 			state.loading = true;
 		},
 		[followUser.fulfilled]: (state, action) => {
-			console.log("action: ", action);
 			state.loading = false;
 			const updatedUserData = action.payload?.data?.user;
 
@@ -149,7 +148,6 @@ export const userSlice = createSlice({
 			toast.success("User followed.");
 		},
 		[followUser.rejected]: (state, action) => {
-			console.log("action: ", action);
 			state.loading = false;
 			toast.error("Some error occured at following user.");
 		},
@@ -159,7 +157,6 @@ export const userSlice = createSlice({
 			state.loading = true;
 		},
 		[unfollowUser.fulfilled]: (state, action) => {
-			console.log("action: ", action);
 			state.loading = false;
 			const updatedUserData = action.payload?.data?.user;
 
@@ -174,7 +171,6 @@ export const userSlice = createSlice({
 			toast.success("User unfollowed.");
 		},
 		[unfollowUser.rejected]: (state, action) => {
-			console.log("action: ", action);
 			state.loading = false;
 			toast.error("Some error occured at unfollowing user.");
 		},

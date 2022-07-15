@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { loaderImg } from "../../assets";
-import { Footer, Header, NewPostCard, PostCard, Sidebar, WhoToFollowCard } from "../../components"
+import { Footer, Header, NewPostCard, PostCard, ScrollToTop, Sidebar, WhoToFollowCard } from "../../components"
 import "./Home.css";
 
 export const Home = () => {
@@ -17,6 +17,7 @@ export const Home = () => {
 
     return (
         <main className="main-container">
+            <ScrollToTop />
             <Header />
             <section className="content-container grid">
                 <div className="left-container fixed ">
