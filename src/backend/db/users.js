@@ -27,15 +27,7 @@ export const users = [
 		avatar: chaupalAvatar,
 		createdAt: formatDate(),
 		updatedAt: formatDate(),
-		followers: [
-			{
-				_id: uuid(),
-				firstName: "Abhishek",
-				lastName: "Gautam",
-				avatar: "https://t3.ftcdn.net/jpg/01/36/49/90/360_F_136499077_xp7bSQB4Dx13ktQp0OYJ5ricWXhiFtD2.jpg",
-				username: "abhishekg",
-			},
-		],
+		followers: [],
 		following: [{ _id: uuid(), username: "jeetsdev" }],
 	},
 	{
@@ -49,7 +41,7 @@ export const users = [
 		createdAt: formatDate(),
 		updatedAt: formatDate(),
 		followers: [
-			{ _id: uuid(), username: "jeetsdev", fullName: "Jeet" },
+			{ _id: uuid(), username: "jeetsdev" },
 			{ _id: uuid(), username: "adii" },
 			{ _id: uuid(), username: "tony" },
 			{ _id: uuid(), username: "ninja" },
@@ -103,7 +95,7 @@ export const users = [
 	},
 	{
 		_id: uuid(),
-		fullName: "CupCake",
+		fullName: "Meow",
 		username: "adii",
 		bio: "Someone, You can't avoid...",
 		website: "https://adii.netlify.app/",

@@ -36,3 +36,8 @@
 footer {
 	border-color: var(--secondary-color);
 }
+
+.follow-card{
+	max-height: 25rem;
+	min-height: 20rem;
+}

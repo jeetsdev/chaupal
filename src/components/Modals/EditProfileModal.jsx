@@ -28,7 +28,6 @@ export const EditProfileModal = ({ editProfileModal, userData, setEditProfileMod
 
     const editProfileSubmitHandler = (event) => {
         event.preventDefault();
-        console.log("newUserData", newUserData);
         dispatch(updateUserData({
             userData: newUserData,
             authToken: authToken
@@ -48,7 +47,7 @@ export const EditProfileModal = ({ editProfileModal, userData, setEditProfileMod
 
     return (
         <main className={`fixed flex justify-center items-center left-0 right-0 bottom-0 top-0 bg-transparent z-20 ` + (editProfileModal ? " post-modal-active" : " post-modal-hide")} onClick={() => setEditProfileModal(prev => !prev)}>
-            <div className={`this is new-post-modal bg-white flex flex-col fixed rounded z-20 px-4` + (editProfileModal ? " post-modal-active" : " post-modal-hide")} onClick={(e) => { e.stopPropagation() }}>
+            <div className={`new-post-modal bg-white flex flex-col fixed rounded z-20 px-4` + (editProfileModal ? " post-modal-active" : " post-modal-hide")} onClick={(e) => { e.stopPropagation() }}>
                 <section className="flex justify-end items-center">
                     <p className="mr-auto text-primary font-bold text-xl font-primary">Edit Profile</p>
                     <button className="btn-secondary-outline text-xl rounded w-6 h-6 my-4 flex justify-center items-center" onClick={() => setEditProfileModal(prev => !prev)}>🗙</button>
@@ -68,7 +67,7 @@ export const EditProfileModal = ({ editProfileModal, userData, setEditProfileMod
                         <div className="flex flex-col gap-2">
                             <input type="text" className="border-2 outline-none rounded p-2 text-2xl font-bold font-primary text-center" value={newUserData?.fullName} onChange={(event) => setNewUserData({ ...newUserData, fullName: event.target.value })} />
                             <input type="text" className="border-2 outline-none rounded p-2 px-4 break-words text-sm w-full text-center" value={newUserData?.bio} onChange={(event) => setNewUserData({ ...newUserData, bio: event.target.value })} />
-                            <input type="text" className="border-2 outline-none rounded p-2 text-primary" value={newUserData?.website} onChange={(event) => setNewUserData({ ...newUserData, website: event.target.value })} />
+                            <input type="text" className="border-2 outline-none rounded p-2 text-primary text-center" value={newUserData?.website} onChange={(event) => setNewUserData({ ...newUserData, website: event.target.value })} />
                         </div>
                         <button type="submit" className="btn-primary p-2 my-2 rounded">Update</button>
                     </form>

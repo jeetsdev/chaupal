@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Footer, Header, PostCard, UserProfileCard, Sidebar, WhoToFollowCard } from "../../components"
+import { Footer, Header, PostCard, UserProfileCard, Sidebar, WhoToFollowCard, ScrollToTop } from "../../components"
 import { getAllPost } from "../../features/Post/PostSlice";
 import { getAllUsers } from "../../features/User/UserSlice";
 
@@ -22,6 +22,7 @@ export const Profile = () => {
 
     return (
         <main className="main-container">
+            <ScrollToTop />
             <Header />
             <section className="content-container grid">
                 <div className="left-container fixed ">

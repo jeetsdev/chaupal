@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 import { noPostImg } from "../../assets";
-import { BookmarkCard, Footer, Header, Sidebar, WhoToFollowCard } from "../../components"
+import { BookmarkCard, Footer, Header, ScrollToTop, Sidebar, WhoToFollowCard } from "../../components"
 
 export const Bookmark = () => {
 
@@ -9,6 +9,7 @@ export const Bookmark = () => {
 
     return (
         <main className="main-container">
+            <ScrollToTop />
             <Header />
             <section className="content-container grid">
                 <div className="left-container fixed ">
