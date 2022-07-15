@@ -1,6 +1,4 @@
 export const filterPost = (filterValue, allPost) => {
-    console.log('filterValue: ', filterValue);
-    console.log('sa: ', filterValue.sortByDate);
 	let filterdPost = allPost;
 
 	// Recent filter here
@@ -17,18 +15,16 @@ export const filterPost = (filterValue, allPost) => {
 
 	// sort by date filter here
 	if (filterValue.sortByDate === "accending") {
-        filterdPost = [...allPost].sort((first, sec) => {
-            return (
-                new Date(sec.createdAt).getDate() -
+		filterdPost = [...allPost].sort((first, sec) => {
+			return (
+				new Date(sec.createdAt).getDate() -
 				new Date(first.createdAt).getDate()
-                );
-            });
-        }
-        
-        if (filterValue.sortByDate === "descending") {
-            filterdPost = [...allPost].sort((first, sec) => {
-            // console.log(new Date(sec.createdAt).getDate())
-            // console.log(new Date(first.createdAt).getDate())
+			);
+		});
+	}
+
+	if (filterValue.sortByDate === "descending") {
+		filterdPost = [...allPost].sort((first, sec) => {
 			return (
 				new Date(first.createdAt).getDate() -
 				new Date(sec.createdAt).getDate()
