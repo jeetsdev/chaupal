@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { noPostImg } from "../../assets";
 import { Footer, Header, PostCard, UserProfileCard, Sidebar, WhoToFollowCard, ScrollToTop } from "../../components"
 
 
@@ -26,10 +27,18 @@ export const Profile = () => {
                     <div>
                         {/* User details here */}
                         <UserProfileCard />
-                        <p className="mx-8 my-6 text-xl font-bold">Your Posts</p>
-                        {currentUserPost?.map(post => {
+                        <p className="mx-8 my-6 text-xl font-bold">Your Posts : </p>
+                        {
+                            currentUserPost.length === 0 ?
+                                <p className="text-xl mt-10 text-center">No post.</p>
+                                :
+                                currentUserPost?.map(post => {
+                                    return <PostCard post={post} key={post._id} />
+                                })
+                        }
+                        {/* {currentUserPost?.map(post => {
                             return <PostCard post={post} key={post._id} />
-                        })}
+                        })} */}
                     </div>
                 </section>
                 <section className="right-container fixed">

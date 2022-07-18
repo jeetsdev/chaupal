@@ -16,7 +16,7 @@ export const OtherProfile = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [dispatch])
-    
+
     const currentUserPost = allPosts?.filter(post => post.username === username);
 
     return (
@@ -34,11 +34,18 @@ export const OtherProfile = () => {
                     </div>
                     <div>
                         {/* User details here */}
-                        <OtherProfileCard userData={currentUser}/>
-                        <p className="mx-8 my-6 text-xl font-bold">Your Posts</p>
-                        {currentUserPost?.map(post => {
-                            return <PostCard post={post} key={post._id} />
-                        })}
+                        <OtherProfileCard userData={currentUser} />
+                        <p className="mx-8 my-6 text-xl font-bold">Your Posts :</p>
+                        {
+                            currentUserPost.length === 0 ?
+                                    <p className="text-xl mt-10 text-center">No post.</p>
+                                // <div className="flex justify-center items-center flex-col">
+                                // </div>
+                                :
+                                currentUserPost?.map(post => {
+                                    return <PostCard post={post} key={post._id} />
+                                })
+                        }
                     </div>
                 </section>
                 <section className="right-container fixed">
