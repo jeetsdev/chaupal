@@ -6,12 +6,12 @@ import { useNavigate } from "react-router-dom"
 
 export const BookmarkCard = ({ post }) => {
 
-    const { authToken } = useSelector(state => state.auth);
+    const { authToken,userData:{username} } = useSelector(state => state.auth);
     const { allUsers } = useSelector(state => state.user);
     const [postMenu, setPostMenu] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const currentPostUser = allUsers.find(user => user.username === post.username);
+    const currentPostUser = allUsers.find(user=> user.username === post.username);
 
     const bookmarkHandler = (event) => {
         event.stopPropagation();
@@ -23,15 +23,25 @@ export const BookmarkCard = ({ post }) => {
         navigate(`/post/${postId}`)
     }
 
+    const usernameClickHandler = (event) => {
+        event.stopPropagation()
+        if (post.username === username) {
+            navigate("/profile")
+        }
+        else {
+            navigate(`/profile/${post.username}`)
+        }
+    }
+
     return (
         <main className="flex post-card p-4 mx-8 bg-white my-2 rounded z-10 hover:cursor-pointer" onClick={() => postClickHandler(post._id)}>
             <section>
                 <img src={currentPostUser?.avatar} alt="" className="w-10 h-10 mr-4 rounded-full object-cover border-2 p-px" />
             </section>
             <section className="w-full">
-                <div className="flex items-center mb-2">
-                    <p className="font-bold">{currentPostUser?.fullName}</p>
-                    <p className="text-xs text-gray-600 mx-2">@{currentPostUser?.username}</p>
+                <div className="flex items-center mb-2" onClick={usernameClickHandler}>
+                    <p className="font-bold hover:underline">{currentPostUser?.fullName}</p>
+                    <p className="text-xs text-gray-600 mx-2 hover:underline">@{currentPostUser?.username}</p>
                 </div>
                 <p className="my-4">
                     {post?.content}

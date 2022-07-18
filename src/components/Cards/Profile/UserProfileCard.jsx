@@ -33,7 +33,7 @@ export const UserProfileCard = () => {
             <FollowingModal followingModal={followingModal} userData={activeUser} setFollowingModal={setFollowingModal} />
             <FollowersModal followersModal={followersModal} setFollowersModal={setFollowersModal} userData={userData} />
             <section className="flex flex-col gap-2 items-center justify-center">
-                <img src={activeUser?.avatar} alt="" className="w-20 h-20 rounded-full object-cover border-2 p-px" />
+                <img src={activeUser?.avatar} alt="user avatar" className="w-20 h-20 rounded-full object-cover border-2 p-px" />
                 <p className="text-2xl font-bold font-primary">{activeUser?.fullName}</p>
                 <p className="text-sm text-gray-600 mx-2">@{activeUser?.username}</p>
                 <p className="px-4 break-words text-sm max-w-3/5 text-center">{activeUser?.bio}</p>
