@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Footer, Header, PostCard, Sidebar, WhoToFollowCard, ScrollToTop, OtherProfileCard } from "../../components"
-import { getCurrentUser } from "../../features/User/UserSlice";
 
 export const OtherProfile = () => {
 

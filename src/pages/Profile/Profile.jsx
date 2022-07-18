@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import { noPostImg } from "../../assets";
 import { Footer, Header, PostCard, UserProfileCard, Sidebar, WhoToFollowCard, ScrollToTop } from "../../components"
 
 
