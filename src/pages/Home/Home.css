@@ -1,12 +1,9 @@
 /*! Container styles here  */
 .left-container {
-	min-width: 20%;
-	left: 0;
-}
-
-.mid-container {
-	margin-left: 20%;
-	margin-right: 25%;
+	min-width: 10%;
+	bottom: 0;
+	z-index: 999;
+	width: 100%;
 }
 
 .right-container {
@@ -37,7 +34,26 @@ footer {
 	border-color: var(--secondary-color);
 }
 
-.follow-card{
+.follow-card {
 	max-height: 25rem;
 	min-height: 20rem;
+}
+
+/*!  Media queries here */
+
+@media screen and (min-width: 768px) {
+	.mid-container {
+		margin-left: 25%;
+	}
+	.left-container {
+		bottom: initial;
+		width: initial;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.mid-container {
+		margin-right: 25%;
+		margin-left: 20%;
+	}
 }

@@ -32,7 +32,7 @@ export const OtherProfileCard = ({ userData }) => {
     }
 
     return (
-        <main className="flex flex-col mx-8 my-2 rounded bg-white p-4">
+        <main className="flex flex-col mx-4 md:mx-8 my-2 rounded bg-white p-4">
 
             {/* Modal here */}
             <FollowingModal followingModal={followingModal} userData={userData} setFollowingModal={setFollowingModal} />

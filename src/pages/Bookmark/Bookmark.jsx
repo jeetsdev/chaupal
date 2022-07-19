@@ -35,7 +35,7 @@ export const Bookmark = () => {
                     }
 
                 </section>
-                <section className="right-container fixed">
+                <section className="right-container fixed hidden text-xs lg:block xl:text-base">
                     <WhoToFollowCard />
                 </section>
             </section>

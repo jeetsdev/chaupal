@@ -1,5 +1,6 @@
 import { FaRegImages } from "react-icons/fa"
 import { AiOutlineFileGif } from "react-icons/ai"
+import { MdCancel } from "react-icons/md"
 import { VscSmiley } from "react-icons/vsc"
 import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
@@ -35,13 +36,13 @@ export const NewPostModal = () => {
             <div className={`new-post-modal bg-white flex flex-col fixed rounded z-20 px-4` + (postModal ? " post-modal-active" : " post-modal-hide")} onClick={(e) => { e.stopPropagation() }}>
                 <section className="flex justify-end items-center">
                     <p className="mr-auto text-primary font-bold text-xl font-primary">New post</p>
-                    <button className="btn-secondary-outline text-xl rounded w-6 h-6 my-4 flex justify-center items-center" onClick={() => dispatch(toggleNewPostModal())}>🗙</button>
+                    <MdCancel className="btn-secondary-outline text-xl rounded w-6 h-6 my-4 flex justify-center items-center hover:cursor-pointer" onClick={() => dispatch(toggleNewPostModal())} />
                 </section>
-                <section className="w-full flex h-full  g-red-200">
+                <section className="w-full flex h-full">
                     <div className="flex-grow-0">
                         <img src={currentPostUser?.avatar} alt="" className="w-10 h-10 rounded-full p-px border-2 object-cover mr-4" />
                     </div>
-                    <form className="w-full  min-h-full" onSubmit={postSubmitHandler}>
+                    <form className="w-full min-h-full" onSubmit={postSubmitHandler}>
                         <div className="min-h-full">
                             <textarea type="text" className=" w-full min-w-full min-h-full p-2 bg-inherit border-2 rounded outline-none resize-none" placeholder="What's happening...?" rows={4} value={postData.content} onChange={(event) => setPostData({ ...postData, content: event.target.value })} />
                         </div>

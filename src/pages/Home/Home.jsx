@@ -53,7 +53,7 @@ export const Home = () => {
                         <NewPostCard />
                     </div>
                     <div>
-                        <div className="flex py-1 mx-8 justify-end gap-4">
+                        <div className="flex py-1 mx-4 md:mx-8 justify-end gap-4">
                             <button className="underline text-primary hover:no-underline hover:cursor-pointer" onClick={trendingHandler}>Trending</button>
                             <button className="underline text-primary hover:no-underline hover:cursor-pointer" onClick={sortByDateHandler}>Sort by Date</button>
                             <button className="underline text-primary hover:no-underline hover:cursor-pointer" onClick={recentHandler}>Recent</button>
@@ -70,7 +70,7 @@ export const Home = () => {
                         }
                     </div>
                 </div>
-                <section className="right-container fixed">
+                <section className="right-container fixed hidden text-xs lg:block xl:text-base">
                     <WhoToFollowCard />
                 </section>
             </section>

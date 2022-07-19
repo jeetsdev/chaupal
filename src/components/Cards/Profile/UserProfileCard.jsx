@@ -28,7 +28,7 @@ export const UserProfileCard = () => {
     }
 
     return (
-        <main className="flex flex-col mx-8 my-2 rounded bg-white p-4">
+        <main className="flex flex-col mx-4 md:mx-8 my-2 rounded bg-white p-4">
             <EditProfileModal editProfileModal={editProfileModal} userData={activeUser} setEditProfileModal={setEditProfileModal} />
             <FollowingModal followingModal={followingModal} userData={activeUser} setFollowingModal={setFollowingModal} />
             <FollowersModal followersModal={followersModal} setFollowersModal={setFollowersModal} userData={userData} />

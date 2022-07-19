@@ -102,7 +102,7 @@ export const SignUp = () => {
                 </form>
 
                 <div className="flex flex-col my-4">
-                    <p>Already have an account? <Link to={"/login"} className="underline text-primary hover:cursor-pointer text-center hover:no-underline mx-2">Login here</Link></p>
+                    <p>Already have an account? <Link to={"/login"} className="underline text-primary hover:cursor-pointer text-center hover:no-underline mx-2">Login</Link></p>
                 </div>
             </section>
             <Footer />

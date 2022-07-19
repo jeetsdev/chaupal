@@ -1,4 +1,5 @@
 import { ImUpload2 } from "react-icons/im"
+import { MdCancel } from "react-icons/md"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import "./NewPostModal.css"
@@ -50,7 +51,7 @@ export const EditProfileModal = ({ editProfileModal, userData, setEditProfileMod
             <div className={`new-post-modal bg-white flex flex-col fixed rounded z-20 px-4` + (editProfileModal ? " post-modal-active" : " post-modal-hide")} onClick={(e) => { e.stopPropagation() }}>
                 <section className="flex justify-end items-center">
                     <p className="mr-auto text-primary font-bold text-xl font-primary">Edit Profile</p>
-                    <button className="btn-secondary-outline text-xl rounded w-6 h-6 my-4 flex justify-center items-center" onClick={() => setEditProfileModal(prev => !prev)}>🗙</button>
+                    <MdCancel className="btn-secondary-outline text-xl rounded w-6 h-6 my-4 flex justify-center items-center hover:cursor-pointer" onClick={() => setEditProfileModal(prev => !prev)} />
                 </section>
                 <section className="w-full flex flex-col gap-2 items-center justify-center h-full mb-6">
                     <form action="" onSubmit={editProfileSubmitHandler} className="flex flex-col justify-center items-center">

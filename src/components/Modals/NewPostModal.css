@@ -1,16 +1,24 @@
-
-.new-post-modal{
-    left: 25%;
-    width: 50%;
-    min-height: 40vh;
+.new-post-modal {
+	width: 80%;
+	min-height: 16rem;
 }
 .post-modal-active {
 	transform: translateY(0vh);
 	transform-origin: right;
-	transition: transform .4s ease-in-out;
+	transition: transform 0.4s ease-in-out;
 }
 .post-modal-hide {
-    transform: translateY(-100vh);
-    transition: transform .4s ease-in-out;
+	transform: translateY(-100vh);
+	transition: transform 0.4s ease-in-out;
 	transform-origin: right;
+}
+
+/*!  Media queries here */
+
+@media screen and (min-width: 768px) {
+	.new-post-modal {
+		left: 25%;
+		width: 50%;
+		min-height: 40vh;
+	}
 }
