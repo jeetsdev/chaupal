@@ -24,9 +24,9 @@ export const Sidebar = () => {
             <section className="flex justify-around py-4 md:hidden bottom-0 bg-white">
                 <Sidemenu route={"/home"} icon={<AiFillHome className="text-2xl" />} />
                 <Sidemenu route={"/explore"} icon={<MdExplore className="text-2xl" />} />
+                <BsFillPlusCircleFill className="text-2xl" onClick={() => dispatch(toggleNewPostModal())} />
                 <Sidemenu route={"/bookmark"} icon={<BsFillBookmarkFill className="text-2xl" />} />
                 <Sidemenu route={"/profile"} icon={<FaUserCircle className="text-2xl" />} />
-                <BsFillPlusCircleFill className="text-2xl" onClick={() => dispatch(toggleNewPostModal())} />
             </section>
 
             {/* Sidebar buttons  */}
