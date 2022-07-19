@@ -11,7 +11,7 @@ export const OtherProfile = () => {
     const { username } = useParams();
 
     const currentUser = allUsers?.find(user => user.username === username);
-    // Getting all posts here
+    
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [dispatch])
@@ -40,12 +40,12 @@ export const OtherProfile = () => {
                                 <p className="text-xl mt-10 text-center">No post.</p>
                                 :
                                 currentUserPost?.map(post => {
-                                    return <PostCard post={post} key={post._id} />
+                                    return <PostCard post={post} key={post?._id} />
                                 })
                         }
                     </div>
                 </section>
-                <section className="right-container fixed">
+                <section className="right-container fixed hidden text-xs lg:block xl:text-base">
                     <WhoToFollowCard />
                 </section>
             </section>

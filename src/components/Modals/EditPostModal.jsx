@@ -1,5 +1,6 @@
 import { FaRegImages } from "react-icons/fa"
 import { AiOutlineFileGif } from "react-icons/ai"
+import { MdCancel } from "react-icons/md"
 import { VscSmiley } from "react-icons/vsc"
 import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
@@ -32,7 +33,7 @@ export const EditPostModal = ({ editModal, post, setEditModal }) => {
             <div className={`new-post-modal bg-white flex flex-col fixed rounded z-20 px-4` + (editModal ? " post-modal-active" : " post-modal-hide")} onClick={(e) => { e.stopPropagation() }}>
                 <section className="flex justify-end items-center">
                     <p className="mr-auto text-primary font-bold text-xl font-primary">Update post</p>
-                    <button className="btn-secondary-outline text-xl rounded w-6 h-6 my-4 flex justify-center items-center" onClick={() => setEditModal(prev => !prev)}>🗙</button>
+                    <MdCancel className="btn-secondary-outline text-xl rounded w-6 h-6 my-4 flex justify-center items-center hover:cursor-pointer" onClick={() => setEditModal(prev => !prev)} />
                 </section>
                 <section className="w-full flex h-full  g-red-200">
                     <div className="flex-grow-0">

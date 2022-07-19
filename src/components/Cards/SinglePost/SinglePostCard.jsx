@@ -92,7 +92,7 @@ export const SinglePostCard = ({ post }) => {
     }, [dispatch, post?._id])
 
     return (
-        <main className="flex flex-col g-secondary p-4 mx-8 bg-white my-2 rounded z-10">
+        <main className="flex flex-col g-secondary p-4 mx-4 md:mx-8 bg-white my-2 rounded z-10">
             <EditPostModal editModal={editModal} post={post} setEditModal={setEditModal} />
             <section className="flex">
                 <section>

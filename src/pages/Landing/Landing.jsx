@@ -4,13 +4,11 @@ import { landingImg } from '../../assets'
 
 export const Landing = () => {
 
-
     return (
         <main className='flex justify-center items-center min-h-screen'>
-            <div className='landing-container grid grid-cols-2 place-items-center-center w-4/5'>
+            <div className='landing-container grid grid-cols-1 w-4/5 sm:grid-cols-2'>
                 <section className='container__left flex justify-center items-center'>
-                    <img className='w-auto h-auto object-contain rounded-3xl' src={landingImg} alt="" />
-
+                    <img className='w-auto h-auto object-contain rounded-3xl landing-img hidden sm:block' src={landingImg} alt="" />
                 </section>
                 <section className='container__right flex justify-center'>
                     <div className='flex justify-center flex-col max-w-3/5'>

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { unfollowUser } from "../../features/User/UserSlice";
-
+import { MdCancel } from "react-icons/md"
 
 export const FollowingModal = ({ setFollowingModal, followingModal, userData }) => {
 
@@ -15,7 +15,7 @@ export const FollowingModal = ({ setFollowingModal, followingModal, userData }) 
             <div className={`new-post-modal bg-white flex flex-col fixed rounded z-20 px-4` + (followingModal ? " post-modal-active" : " post-modal-hide")} onClick={(e) => { e.stopPropagation() }}>
                 <section className="flex items-center">
                     <p className="mr-auto text-primary font-bold text-xl font-primary">Following</p>
-                    <button className="btn-secondary-outline text-xl rounded w-6 h-6 my-4 flex justify-center items-center" onClick={() => setFollowingModal(prev => !prev)}>🗙</button>
+                    <MdCancel className="btn-secondary-outline text-xl rounded w-6 h-6 my-4 flex justify-center items-center hover:cursor-pointer" onClick={() => setFollowingModal(prev => !prev)} />
                 </section>
                 <section>
                     {userData?.following?.length === 0 ?
@@ -33,7 +33,7 @@ export const FollowingModal = ({ setFollowingModal, followingModal, userData }) 
                                         <p className='font-bold'>{following?.fullName}</p>
                                         <p className='text-xs text-gray-600'>{following?.username}</p>
                                     </section>
-                                    <button className='text-primary underline hover:no-underline px-2 py-1 ml-auto rounded text-sm font-bold text-black' onClick={()=>unfollowUserHandler(following._id)}>Unfollow - </button>
+                                    <button className='text-primary underline hover:no-underline px-2 py-1 ml-auto rounded text-sm font-bold text-black' onClick={() => unfollowUserHandler(following._id)}>Unfollow - </button>
                                 </div>
                             })}
                         </div>}

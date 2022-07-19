@@ -69,7 +69,7 @@ export const PostCard = ({ post }) => {
     }
 
     return (
-        <main className="hover:cursor-pointer post-card flex g-secondary p-4 mx-8 bg-white my-2 rounded z-10" onClick={() => postClickHandler(post._id)}>
+        <main className="hover:cursor-pointer post-card flex g-secondary p-4 mx-4 md:mx-8 bg-white my-2 rounded z-10" onClick={() => postClickHandler(post._id)}>
             <EditPostModal editModal={editModal} post={post} setEditModal={setEditModal} />
             <section>
                 <img src={currentPostUser?.avatar} alt="" className="w-10 h-10 mr-4 rounded-full object-cover border-2 p-px" />

@@ -34,7 +34,7 @@ export const BookmarkCard = ({ post }) => {
     }
 
     return (
-        <main className="flex post-card p-4 mx-8 bg-white my-2 rounded z-10 hover:cursor-pointer" onClick={() => postClickHandler(post._id)}>
+        <main className="flex post-card p-4 mx-4 md:mx-8 bg-white my-2 rounded z-10 hover:cursor-pointer" onClick={() => postClickHandler(post._id)}>
             <section>
                 <img src={currentPostUser?.avatar} alt="" className="w-10 h-10 mr-4 rounded-full object-cover border-2 p-px" />
             </section>

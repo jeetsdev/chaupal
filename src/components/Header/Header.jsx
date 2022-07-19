@@ -18,21 +18,21 @@ export const Header = () => {
     }
 
     return (
-        <nav className="main-header flex justify-between items-center fixed top-0 w-full py-4 px-8 border-b-2 bg-inherit z-10">
+        <nav className="main-header flex justify-between items-center fixed left-0 top-0 w-full py-4 px-4 md:px-8 border-b-2 bg-inherit z-10">
             <Link to={authToken ? "/home" : "/"} className="flex items-center ">
-                <img src={logo} alt="logo" className="w-10 mx-2" />
+                <img src={logo} alt="logo" className="w-10" />
                 <h1 className="font-primary text-2xl text-left  mx-2 text-primary font-bold">चौपाल</h1>
             </Link>
             <div>
-                <form action="" onSubmit={(event) => event.preventDefault()} className="flex justify-center items-center border-2 rounded">
+                {authToken && <form action="" onSubmit={(event) => event.preventDefault()} className="justify-center items-center border-2 rounded hidden sm:flex">
                     <FaSearch className="mx-2" />
                     <input type="text" placeholder="Search here" className='p-2 outline-none bg-inherit' />
-                </form>
+                </form>}
             </div>
             <div>
                 {authToken ?
                     <button className='flex justify-center items-center p-2 rounded btn-secondary-outline font-bold' onClick={logoutHandler}>
-                        <BiLogOutCircle className="mx-1"/>
+                        <BiLogOutCircle className="mx-1" />
                         Logout
                     </button>
                     :
