@@ -1,4 +1,4 @@
-import { BsGithub, BsTwitter, BsLinkedin, BsBagFill } from "react-icons/bs"
+import { BsGithub, BsTwitter, BsLinkedin } from "react-icons/bs"
 
 export const Footer = () => {
   return (
