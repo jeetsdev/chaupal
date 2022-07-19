@@ -10,10 +10,7 @@ export const WhoToFollowCard = () => {
     // Filtering users to follow here by current user and already followed ones
     const userFilterFun = (user) => {
         const isAlreayFollowed = currentUser.following.some(following => following.username === user.username);
-        if (isAlreayFollowed) {
-            return false
-        }
-        if (user.username === username) {
+        if (isAlreayFollowed || user.username === username) {
             return false
         }
         else {

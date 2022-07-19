@@ -7,3 +7,4 @@ export { Profile } from "./Profile/Profile";
 export { Login } from "./Auth/Login";
 export { SignUp } from "./Auth/SignUp";
 export { Post } from "./Post/Post";
+export { OtherProfile } from "./Profile/OtherProfile";

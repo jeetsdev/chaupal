@@ -1,4 +1,4 @@
-            import { BsHeart, BsHeartFill, BsBookmarkPlusFill, BsBookmarkCheckFill, BsThreeDotsVertical, BsChatDots } from "react-icons/bs"
+import { BsHeart, BsHeartFill, BsBookmarkPlusFill, BsBookmarkCheckFill, BsThreeDotsVertical, BsChatDots } from "react-icons/bs"
 import { AiFillEdit, AiFillDelete } from "react-icons/ai"
 import { useDispatch, useSelector } from "react-redux"
 import "./PostCard.css"
@@ -58,6 +58,15 @@ export const PostCard = ({ post }) => {
         navigate(`/post/${postId}`)
     }
 
+    const usernameClickHandler = (event) => {
+        event.stopPropagation()
+        if (post.username === username) {
+            navigate("/profile")
+        }
+        else {
+            navigate(`/profile/${post.username}`)
+        }
+    }
 
     return (
         <main className="hover:cursor-pointer post-card flex g-secondary p-4 mx-8 bg-white my-2 rounded z-10" onClick={() => postClickHandler(post._id)}>
@@ -66,9 +75,9 @@ export const PostCard = ({ post }) => {
                 <img src={currentPostUser?.avatar} alt="" className="w-10 h-10 mr-4 rounded-full object-cover border-2 p-px" />
             </section>
             <section className="w-full">
-                <div className="flex items-center mb-2">
-                    <p className="font-bold">{currentPostUser?.fullName}</p>
-                    <p className="text-xs text-gray-600 mx-2">@{currentPostUser?.username}</p>
+                <div className="flex items-center mb-2" onClick={usernameClickHandler}>
+                    <p className="font-bold hover:underline">{currentPostUser?.fullName}</p>
+                    <p className="text-xs text-gray-600 mx-2 hover:underline">@{currentPostUser?.username}</p>
                 </div>
                 <p className="my-4">
                     {post?.content}

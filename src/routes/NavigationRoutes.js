@@ -10,6 +10,7 @@ import {
 	Login,
 	SignUp,
 	Post,
+	OtherProfile,
 } from "../pages";
 
 export const NavigationRoutes = () => {
@@ -21,6 +22,7 @@ export const NavigationRoutes = () => {
 				<Route path="/explore" element={<Explore />} />
 				<Route path="/bookmark" element={<Bookmark />} />
 				<Route path="/profile" element={<Profile />} />
+				<Route path="/profile/:username" element={<OtherProfile />} />
 				<Route path="/post/:postID" element={<Post />} />
 			</Route>
 			<Route element={<NotRequireAuth />}>

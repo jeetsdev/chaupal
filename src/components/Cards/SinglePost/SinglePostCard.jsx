@@ -8,6 +8,7 @@ import toast from "react-hot-toast"
 import { CommentCard } from "../Comment/CommentCard"
 import { addComment, getAllComment } from "../../../features/Commnets/CommentSlice";
 import { loaderImg } from "../../../assets";
+import { useNavigate } from "react-router-dom";
 
 export const SinglePostCard = ({ post }) => {
 
@@ -15,8 +16,7 @@ export const SinglePostCard = ({ post }) => {
     const { bookmarkedPost } = useSelector(state => state.post);
     const { postComments, loading } = useSelector(state => state.comment);
     const { allUsers } = useSelector(state => state.user);
-
-
+    const navigate = useNavigate();
     const [postMenu, setPostMenu] = useState(false);
     const [editModal, setEditModal] = useState(false);
     const [commentFormData, setCommentFormData] = useState({
@@ -76,6 +76,16 @@ export const SinglePostCard = ({ post }) => {
         }
     }
 
+    const usernameClickHandler = (event) => {
+        event.stopPropagation()
+        if (post.username === username) {
+            navigate("/profile")
+        }
+        else {
+            navigate(`/profile/${post.username}`)
+        }
+    }
+
     // Fetching all comments here 
     useEffect(() => {
         dispatch(getAllComment({ postID: post?._id }));
@@ -89,9 +99,9 @@ export const SinglePostCard = ({ post }) => {
                     <img src={currentPostUser?.avatar} alt="" className="w-10 h-10 mr-4 rounded-full object-cover border-2 p-px" />
                 </section>
                 <section className="w-full">
-                    <div className="flex items-center mb-2">
-                        <p className="font-bold">{currentPostUser?.fullName}</p>
-                        <p className="text-xs text-gray-600 mx-2">@{currentPostUser?.username}</p>
+                    <div className="flex items-center mb-2" onClick={usernameClickHandler}>
+                        <p className="font-bold hover:underline">{currentPostUser?.fullName}</p>
+                        <p className="text-xs text-gray-600 mx-2 hover:underline">@{currentPostUser?.username}</p>
                     </div>
                     <p className="my-4">
                         {post?.content}

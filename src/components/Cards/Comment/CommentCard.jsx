@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { MdDelete, MdModeEditOutline } from "react-icons/md"
 import { deleteComment } from '../../../features/Commnets/CommentSlice';
 import { getAllPost } from '../../../features/Post/PostSlice';
+import { useNavigate } from 'react-router-dom';
 
 export const CommentCard = ({ comment, postID }) => {
 
     const { userData: { username }, authToken } = useSelector(state => state.auth);
     const { allUsers } = useSelector(state => state.user);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     // Getting the current user here 
     const currentUser = (allUsers.filter(user => comment.username === user.username))[0];
@@ -22,6 +24,16 @@ export const CommentCard = ({ comment, postID }) => {
         dispatch(getAllPost());
     }
 
+    const usernameClickHandler = (event) => {
+        event.stopPropagation()
+        if (comment.username === username) {
+            navigate("/profile")
+        }
+        else {
+            navigate(`/profile/${comment.username}`)
+        }
+    }
+
     return (
         <main className='flex mt-2'>
             <section>
@@ -29,9 +41,9 @@ export const CommentCard = ({ comment, postID }) => {
             </section>
             <section>
                 <div className="w-full">
-                    <div className="flex items-center mb-2">
-                        <p className="font-bold">{currentUser?.fullName}</p>
-                        <p className="text-xs text-gray-600 mx-2">@{comment?.username}</p>
+                    <div className="flex items-center mb-2" onClick={usernameClickHandler}>
+                        <p className="font-bold hover:underline">{currentUser?.fullName}</p>
+                        <p className="text-xs text-gray-600 mx-2 hover:underline">@{comment?.username}</p>
                     </div>
                     <p className="my-2 text-gray-800">
                         {comment?.text}

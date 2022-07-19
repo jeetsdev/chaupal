@@ -1,9 +1,8 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 import {
 	followUserService,
 	getAllUsersService,
-	getCurrentUserService,
 	unfollowUserService,
 	updateUserDataService,
 } from "../../services/userService";
@@ -14,24 +13,24 @@ const initialState = {
 	loading: false,
 };
 
+// Function to update a user data from all users
+const updateSingleUser = (data, currentUser) => {
+	const updatedData = data.map((user) => {
+		if (user.username === currentUser?.username) {
+			return currentUser;
+		} else {
+			return user;
+		}
+	});
+	return updatedData;
+};
+
 // All users here
 export const getAllUsers = createAsyncThunk(
 	"posts/getAllUsers",
 	async (_, { rejectWithValue }) => {
 		try {
 			return await getAllUsersService();
-		} catch (error) {
-			return rejectWithValue(error);
-		}
-	},
-);
-
-// Axctive user here
-export const getCurrentUser = createAsyncThunk(
-	"posts/getCurrentUser",
-	async ({ userId }, { rejectWithValue }) => {
-		try {
-			return await getCurrentUserService(userId);
 		} catch (error) {
 			return rejectWithValue(error);
 		}
@@ -93,19 +92,6 @@ export const userSlice = createSlice({
 			toast.error("Some error occured getting users.");
 		},
 
-		//! Current users reducer here
-		[getCurrentUser.pending]: (state) => {
-			state.loading = true;
-		},
-		[getCurrentUser.fulfilled]: (state, { payload }) => {
-			state.loading = false;
-			// state.allUsers = payload?.data?.users;
-		},
-		[getCurrentUser.rejected]: (state, action) => {
-			state.loading = false;
-			toast.error("Some error occured getting users.");
-		},
-
 		//! Update user reducer here
 		[updateUserData.pending]: (state) => {
 			state.loading = true;
@@ -135,16 +121,16 @@ export const userSlice = createSlice({
 		},
 		[followUser.fulfilled]: (state, action) => {
 			state.loading = false;
-			const updatedUserData = action.payload?.data?.user;
-
-			const updatedUsers = state?.allUsers?.map((user) => {
-				if (user.username === updatedUserData?.username) {
-					return updatedUserData;
-				} else {
-					return user;
-				}
-			});
-			state.allUsers = updatedUsers;
+			const currentUser = action.payload?.data?.user;
+			const followedUser = action.payload?.data?.followUser;
+			state.allUsers = updateSingleUser(
+				current(state).allUsers,
+				currentUser,
+			);
+			state.allUsers = updateSingleUser(
+				current(state).allUsers,
+				followedUser,
+			);
 			toast.success("User followed.");
 		},
 		[followUser.rejected]: (state, action) => {
@@ -158,16 +144,16 @@ export const userSlice = createSlice({
 		},
 		[unfollowUser.fulfilled]: (state, action) => {
 			state.loading = false;
-			const updatedUserData = action.payload?.data?.user;
-
-			const updatedUsers = state?.allUsers?.map((user) => {
-				if (user.username === updatedUserData?.username) {
-					return updatedUserData;
-				} else {
-					return user;
-				}
-			});
-			state.allUsers = updatedUsers;
+			const currentUser = action.payload?.data?.user;
+			const unfollowedUser = action.payload?.data?.followUser;
+			state.allUsers = updateSingleUser(
+				current(state).allUsers,
+				currentUser,
+			);
+			state.allUsers = updateSingleUser(
+				current(state).allUsers,
+				unfollowedUser,
+			);
 			toast.success("User unfollowed.");
 		},
 		[unfollowUser.rejected]: (state, action) => {
