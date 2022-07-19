@@ -35,9 +35,6 @@ export const Profile = () => {
                                     return <PostCard post={post} key={post._id} />
                                 })
                         }
-                        {/* {currentUserPost?.map(post => {
-                            return <PostCard post={post} key={post._id} />
-                        })} */}
                     </div>
                 </section>
                 <section className="right-container fixed">

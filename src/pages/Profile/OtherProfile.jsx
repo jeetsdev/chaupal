@@ -37,9 +37,7 @@ export const OtherProfile = () => {
                         <p className="mx-8 my-6 text-xl font-bold">Your Posts :</p>
                         {
                             currentUserPost.length === 0 ?
-                                    <p className="text-xl mt-10 text-center">No post.</p>
-                                // <div className="flex justify-center items-center flex-col">
-                                // </div>
+                                <p className="text-xl mt-10 text-center">No post.</p>
                                 :
                                 currentUserPost?.map(post => {
                                     return <PostCard post={post} key={post._id} />
