@@ -39,4 +39,11 @@ $ npm start
 - Redux Toolkit 
 - React Router v6
 
+
 ## **Demo -**
+
+https://user-images.githubusercontent.com/44586579/179922098-af9be05d-1878-44d2-a0ab-2dff46e2950f.mp4
+
+
+
+
