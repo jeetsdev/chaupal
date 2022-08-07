@@ -13,6 +13,13 @@
 	transform-origin: right;
 }
 
+.emoji-picker-sec {
+	max-width: 80vw;
+	left: -2rem;
+	box-shadow: 0 0 10px 5px var(--secondary-color);
+	border-radius: 5px;
+}
+
 /*!  Media queries here */
 
 @media screen and (min-width: 768px) {
