@@ -7,7 +7,7 @@ import { BsKeyFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import "./Auth.css";
-import { avatar, loaderImg } from "../../assets";
+import { loaderImg } from "../../assets";
 import { useDispatch, useSelector } from "react-redux";
 import { validateEmail, validatePassword } from "../../utils";
 import toast from "react-hot-toast";
@@ -20,7 +20,7 @@ export const SignUp = () => {
 		email: "",
 		password: "",
 		passType: "password",
-		avatar: avatar,
+		avatar: "https://res.cloudinary.com/dz7duml2h/image/upload/v1654790981/End-User-08_lsvghb.svg",
 	});
 
 	// password visibilty handler here
