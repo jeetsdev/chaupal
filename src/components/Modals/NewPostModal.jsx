@@ -1,6 +1,6 @@
 import { FaRegImages } from "react-icons/fa";
-import { AiOutlineFileGif } from "react-icons/ai";
 import { MdCancel } from "react-icons/md";
+import { IoRemoveCircleSharp } from "react-icons/io5";
 import { BsEmojiSmile, BsEmojiNeutral } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { useRef, useState } from "react";
@@ -19,6 +19,7 @@ export const NewPostModal = () => {
 	const dispatch = useDispatch();
 	const [postData, setPostData] = useState({
 		content: "",
+		postImg: "",
 	});
 	const [showEmojiPicker, setShowEomjiPicker] = useState(false);
 	const inputRef = useRef(null);
@@ -27,11 +28,20 @@ export const NewPostModal = () => {
 		(user) => user?.username === userData?.username,
 	);
 
+	// Image click handler here
+	const modalImageHandler = (event) => {
+		const reader = new FileReader();
+		reader.onload = () => {
+			setPostData({ ...postData, postImg: reader.result });
+		};
+		reader.readAsDataURL(event.target.files[0]);
+	};
+
 	const postSubmitHandler = (event) => {
 		event.preventDefault();
 		if (postData.content.trim() !== "") {
 			dispatch(createNewPost({ postData, authToken }));
-			setPostData({ ...postData, content: "" });
+			setPostData({ ...postData, content: "", postImg: "" });
 			setShowEomjiPicker((prev) => false);
 			dispatch(toggleNewPostModal());
 		} else {
@@ -71,13 +81,11 @@ export const NewPostModal = () => {
 							className="w-10 h-10 rounded-full p-px border-2 object-cover mr-4"
 						/>
 					</div>
-					<form
-						className="w-full min-h-full"
-						onSubmit={postSubmitHandler}>
-						<div className="min-h-full">
+					<form className="w-full" onSubmit={postSubmitHandler}>
+						<div className="w-full min-w-full p-2 bg-inherit border-2 rounded">
 							<textarea
 								type="text"
-								className=" w-full min-w-full min-h-full p-2 bg-inherit border-2 rounded outline-none resize-none"
+								className="w-full bg-inherit  rounded outline-none resize-none"
 								placeholder="What's happening...?"
 								rows={4}
 								ref={inputRef}
@@ -89,21 +97,52 @@ export const NewPostModal = () => {
 									})
 								}
 							/>
+							<div className="relative ">
+								{postData?.postImg && (
+									<div>
+										<img
+											src={postData?.postImg}
+											alt=""
+											className="w-full max-h-200p rounded"
+										/>
+										<span
+											className="absolute bottom-2 left-2 cursor-pointer"
+											onClick={() =>
+												setPostData({
+													...postData,
+													postImg: "",
+												})
+											}>
+											<IoRemoveCircleSharp className="text-red-500 text-2xl" />
+										</span>
+									</div>
+								)}
+							</div>
 						</div>
-						<div className="flex items-center">
+						<div className="flex py-4">
 							<div className="flex text-xl relative">
-								<FaRegImages className="hover:cursor-pointer" />
-								<AiOutlineFileGif className="mx-2 hover:cursor-pointer" />
+								<div className="flex">
+									<label htmlFor="post-modal-img">
+										<FaRegImages className="cursor-pointer" />
+									</label>
+									<input
+										type="file"
+										id="post-modal-img"
+										accept="image/png, image/jpeg, image/jpg"
+										className="hidden"
+										onInput={modalImageHandler}
+									/>
+								</div>
 								{showEmojiPicker ? (
 									<BsEmojiSmile
-										className="hover:cursor-pointer"
+										className="hover:cursor-pointer ml-2"
 										onClick={() =>
 											setShowEomjiPicker((prev) => !prev)
 										}
 									/>
 								) : (
 									<BsEmojiNeutral
-										className="hover:cursor-pointer"
+										className="hover:cursor-pointer ml-2"
 										onClick={() =>
 											setShowEomjiPicker((prev) => !prev)
 										}

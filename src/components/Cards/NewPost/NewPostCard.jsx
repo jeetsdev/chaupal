@@ -1,8 +1,8 @@
 import { FaRegImages } from "react-icons/fa";
-import { AiOutlineFileGif } from "react-icons/ai";
+import { IoRemoveCircleSharp } from "react-icons/io5";
 import { BsEmojiSmile, BsEmojiNeutral } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createNewPost } from "../../../features/Post/PostSlice";
 import toast from "react-hot-toast";
 import { EmojiPicker } from "../../EmojiPicker/EmojiPicker";
@@ -13,8 +13,10 @@ export const NewPostCard = () => {
 	const dispatch = useDispatch();
 	const [postData, setPostData] = useState({
 		content: "",
+		postImg: "",
 	});
 	const [showEmojiPicker, setShowEomjiPicker] = useState(false);
+
 	// Getting refrence of input box
 	const inputRef = useRef(null);
 
@@ -23,16 +25,27 @@ export const NewPostCard = () => {
 		(user) => user.username === userData.username,
 	);
 
+	// Image click handler here
+	const postImageHandler = (event) => {
+		const reader = new FileReader();
+		reader.onload = () => {
+			setPostData({ ...postData, postImg: reader.result });
+		};
+		reader.readAsDataURL(event.target.files[0]);
+	};
+
 	const postSubmitHandler = (event) => {
 		event.preventDefault();
 		setShowEomjiPicker((prev) => false);
 		if (postData.content !== "") {
 			dispatch(createNewPost({ postData, authToken }));
-			setPostData({ ...postData, content: "" });
+			setPostData({ ...postData, content: "", postImg: "" });
 		} else {
 			toast.error("Post can't be empty");
 		}
 	};
+
+	useEffect(() => {});
 
 	return (
 		<main className="flex rounded bg-white p-4 mx-4 md:mx-8 my-6 relative">
@@ -44,10 +57,10 @@ export const NewPostCard = () => {
 				/>
 			</section>
 			<form className="w-full" onSubmit={postSubmitHandler}>
-				<div>
+				<div className="w-full min-w-full p-2 bg-inherit border-2 rounded">
 					<textarea
 						type="text"
-						className="w-full min-w-full p-2 bg-inherit border-2 rounded outline-none resize-none"
+						className="w-full min-w-full p-2 bg-inherit  rounded outline-none resize-none"
 						placeholder="What's happening...?"
 						value={postData.content}
 						ref={inputRef}
@@ -58,21 +71,52 @@ export const NewPostCard = () => {
 							})
 						}
 					/>
+					<div className="relative ">
+						{postData?.postImg && (
+							<div>
+								<img
+									src={postData?.postImg}
+									alt=""
+									className="w-full max-h-200p rounded"
+								/>
+								<span
+									className="absolute bottom-2 left-2 cursor-pointer"
+									onClick={() =>
+										setPostData({
+											...postData,
+											postImg: "",
+										})
+									}>
+									<IoRemoveCircleSharp className="text-red-500 text-2xl" />
+								</span>
+							</div>
+						)}
+					</div>
 				</div>
-				<div className="flex items-center">
+				<div className="flex py-4">
 					<div className="flex text-xl relative">
-						<FaRegImages className="hover:cursor-pointer" />
-						<AiOutlineFileGif className="mx-2 hover:cursor-pointer" />
+						<div className="flex">
+							<label htmlFor="new-post-img">
+								<FaRegImages className="cursor-pointer" />
+							</label>
+							<input
+								type="file"
+								id="new-post-img"
+								accept="image/png, image/jpeg, image/jpg"
+								className="hidden"
+								onInput={postImageHandler}
+							/>
+						</div>
 						{showEmojiPicker ? (
 							<BsEmojiSmile
-								className="hover:cursor-pointer"
+								className="hover:cursor-pointer ml-2"
 								onClick={() =>
 									setShowEomjiPicker((prev) => !prev)
 								}
 							/>
 						) : (
 							<BsEmojiNeutral
-								className="hover:cursor-pointer"
+								className="hover:cursor-pointer ml-2"
 								onClick={() =>
 									setShowEomjiPicker((prev) => !prev)
 								}
@@ -89,7 +133,7 @@ export const NewPostCard = () => {
 					</div>
 					<button
 						type="submit"
-						className="ml-auto px-2 rounded btn-primary text-lg font-bold text-center ">
+						className="ml-auto  px-2 rounded btn-primary text-lg font-bold text-center ">
 						Post
 					</button>
 				</div>
