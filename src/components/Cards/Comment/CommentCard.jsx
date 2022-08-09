@@ -52,7 +52,6 @@ export const CommentCard = ({ comment, postID }) => {
             </section>
             {comment?.username === username && <section className='ml-auto flex items-end'>
                 <MdDelete className='text-xl mx-1 text-zinc-700 hover:cursor-pointer btn-icon' onClick={deleteCommentHandler} />
-                <MdModeEditOutline className='text-xl mx-1 text-zinc-700 hover:cursor-pointer btn-icon' />
             </section>}
         </main>
     )
