@@ -109,14 +109,14 @@ export const NewPostCard = () => {
 						</div>
 						{showEmojiPicker ? (
 							<BsEmojiSmile
-								className="hover:cursor-pointer ml-2"
+								className="hover:cursor-pointer ml-4"
 								onClick={() =>
 									setShowEomjiPicker((prev) => !prev)
 								}
 							/>
 						) : (
 							<BsEmojiNeutral
-								className="hover:cursor-pointer ml-2"
+								className="hover:cursor-pointer ml-4"
 								onClick={() =>
 									setShowEomjiPicker((prev) => !prev)
 								}
