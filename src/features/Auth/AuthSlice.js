@@ -106,8 +106,6 @@ export const authSlice = createSlice({
 			toast.success(`Welcome ${createdUser.fullName}`);
 			state.authToken = encodedToken;
 			state.userData = createdUser;
-			localStorage.setItem("encoded-token", encodedToken);
-			localStorage.setItem("user-data", JSON.stringify(createdUser));
 		},
 		[userSignUp.rejected]: (state, { payload }) => {
 			state.loading = false;

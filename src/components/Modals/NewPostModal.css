@@ -1,16 +1,25 @@
 .new-post-modal {
-	width: 80%;
+	width: 90%;
 	min-height: 16rem;
 }
+
 .post-modal-active {
 	transform: translateY(0vh);
-	transform-origin: right;
+	transform-origin: top;
 	transition: transform 0.4s ease-in-out;
 }
+
 .post-modal-hide {
 	transform: translateY(-100vh);
 	transition: transform 0.4s ease-in-out;
-	transform-origin: right;
+	transform-origin: top;
+}
+
+.emoji-picker-sec {
+	max-width: 80vw;
+	left: -2rem;
+	box-shadow: 0 0 10px 5px var(--secondary-color);
+	border-radius: 5px;
 }
 
 /*!  Media queries here */
