@@ -104,14 +104,14 @@ export const PostCard = ({ post }) => {
 			</section>
 			<section className="w-full">
 				<div
-					className="flex items-center mb-2"
+					className="flex items-center w-max mb-2"
 					onClick={usernameClickHandler}>
 					<p className="font-bold hover:underline">
 						{currentPostUser?.fullName}
 					</p>
-					<p className="text-xs text-gray-600 mx-2 hover:underline">
+					<span className="text-xs text-gray-600 mx-2 hover:underline">
 						@{currentPostUser?.username}
-					</p>
+					</span>
 				</div>
 				<p className="my-4">
 					{post?.content}

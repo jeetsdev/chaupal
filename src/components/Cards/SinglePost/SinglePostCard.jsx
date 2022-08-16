@@ -134,7 +134,7 @@ export const SinglePostCard = ({ post }) => {
 				</section>
 				<section className="w-full">
 					<div
-						className="flex items-center mb-2"
+						className="flex items-center w-max mb-2"
 						onClick={usernameClickHandler}>
 						<p className="font-bold hover:underline">
 							{currentPostUser?.fullName}
