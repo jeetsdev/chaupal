@@ -4,6 +4,7 @@ import "./App.css";
 import { MyToast, NewPostModal } from "./components";
 import { getAllPost } from "./features/Post/PostSlice";
 import { getAllUsers } from "./features/User/UserSlice";
+import { useDocumentTitle } from "./hooks/useDocumentTitle";
 import { NavigationRoutes } from "./routes/NavigationRoutes";
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
 	const dispatch = useDispatch();
 	const { authToken } = useSelector((state) => state.auth);
 
+	useDocumentTitle();
 	useEffect(() => {
 		dispatch(getAllPost());
 		dispatch(getAllUsers());
