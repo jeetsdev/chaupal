@@ -22,6 +22,8 @@ export const SignUp = () => {
 		passType: "password",
 		avatar: "https://res.cloudinary.com/dz7duml2h/image/upload/v1654790981/End-User-08_lsvghb.svg",
 	});
+	const dispatch = useDispatch();
+	const { loading } = useSelector((store) => store.auth);
 
 	// password visibilty handler here
 	const passVisibiltyHandler = () => {
@@ -51,8 +53,15 @@ export const SignUp = () => {
 		}
 	};
 
-	const dispatch = useDispatch();
-	const { loading } = useSelector((store) => store.auth);
+	const testCredentialHandler = () => {
+		setSignUpFormData({
+			...signUpFormData,
+			fullName: "Mr. Wayne",
+			username: "wayne",
+			email: "wayne@darkworld.none",
+			password: "wayne@123",
+		});
+	};
 
 	return (
 		<main className="main-container flex flex-col min-h-screen">
@@ -172,6 +181,13 @@ export const SignUp = () => {
 					<button className="btn-primary my-4 p-2 rounded text-lg font-bold">
 						Sign Up
 					</button>
+					<p
+						className="underline text-primary hover:cursor-pointer text-center hover:no-underline"
+						onClick={() => {
+							testCredentialHandler();
+						}}>
+						Use test credentials
+					</p>
 				</form>
 
 				<div className="flex flex-col my-4">
