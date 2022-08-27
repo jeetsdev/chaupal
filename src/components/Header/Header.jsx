@@ -29,7 +29,7 @@ export const Header = () => {
                     <input type="text" placeholder="Search here" className='p-2 outline-none bg-inherit' />
                 </form>}
             </div>
-            <div>
+            <div className='hidden'>
                 {authToken ?
                     <button className='flex justify-center items-center p-2 rounded btn-secondary-outline font-bold' onClick={logoutHandler}>
                         <BiLogOutCircle className="mx-1" />
