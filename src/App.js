@@ -8,23 +8,23 @@ import { useDocumentTitle } from "./hooks/useDocumentTitle";
 import { NavigationRoutes } from "./routes/NavigationRoutes";
 
 function App() {
-	// Getting all post here
-	const dispatch = useDispatch();
-	const { authToken } = useSelector((state) => state.auth);
+  // Getting all post here
+  const dispatch = useDispatch();
+  const { authToken } = useSelector((state) => state.auth);
 
-	useDocumentTitle();
-	useEffect(() => {
-		dispatch(getAllPost());
-		dispatch(getAllUsers());
-	}, [dispatch, authToken]);
+  useDocumentTitle();
+  useEffect(() => {
+    dispatch(getAllPost());
+    dispatch(getAllUsers());
+  }, [dispatch, authToken]);
 
-	return (
-		<div id="main-app">
-			<MyToast />
-			<NewPostModal />
-			<NavigationRoutes />
-		</div>
-	);
+  return (
+    <div id="main-app">
+      <MyToast />
+      <NewPostModal />
+      <NavigationRoutes />
+    </div>
+  );
 }
 
 export default App;
