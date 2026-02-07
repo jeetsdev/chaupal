@@ -60,7 +60,7 @@ export const commentSlice = createSlice({
 			})
 			.addCase(getAllComment.fulfilled, (state, { payload }) => {
 				state.loading = false;
-				state.postComments = payload?.data?.comments;
+				state.postComments = payload?.comments;
 			})
 			.addCase(getAllComment.rejected, (state) => {
 				state.loading = false;
@@ -70,7 +70,7 @@ export const commentSlice = createSlice({
 			//! Add new comment reducers here
 			.addCase(addComment.fulfilled, (state, { meta, payload }) => {
 				state.loading = false;
-				const currentPost = payload?.data?.posts?.filter(
+				const currentPost = payload?.posts?.filter(
 					(eachPost) => eachPost._id === meta.arg.postID,
 				);
 				state.postComments = currentPost[0]?.comments;
@@ -83,7 +83,7 @@ export const commentSlice = createSlice({
 
 			.addCase(deleteComment.fulfilled, (state, { payload }) => {
 				state.loading = false;
-				state.postComments = payload?.data?.comments;
+				state.postComments = payload?.comments;
 				toast.success("Comment deleted.");
 			})
 			.addCase(deleteComment.rejected, (state) => {

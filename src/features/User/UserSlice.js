@@ -85,7 +85,7 @@ export const userSlice = createSlice({
 			})
 			.addCase(getAllUsers.fulfilled, (state, { payload }) => {
 				state.loading = false;
-				state.allUsers = payload?.data?.users;
+				state.allUsers = payload?.users;
 			})
 			.addCase(getAllUsers.rejected, (state) => {
 				state.loading = false;
@@ -98,7 +98,7 @@ export const userSlice = createSlice({
 			})
 			.addCase(updateUserData.fulfilled, (state, action) => {
 				state.loading = false;
-				const updatedUserData = action.payload?.data?.user;
+				const updatedUserData = action.payload?.user;
 
 				const updatedUsers = state?.allUsers?.map((user) => {
 					if (user.username === updatedUserData?.username) {
@@ -121,8 +121,8 @@ export const userSlice = createSlice({
 			})
 			.addCase(followUser.fulfilled, (state, action) => {
 				state.loading = false;
-				const currentUser = action.payload?.data?.user;
-				const followedUser = action.payload?.data?.followUser;
+				const currentUser = action.payload?.user;
+				const followedUser = action.payload?.followUser;
 				state.allUsers = updateSingleUser(
 					current(state).allUsers,
 					currentUser,
@@ -144,8 +144,8 @@ export const userSlice = createSlice({
 			})
 			.addCase(unfollowUser.fulfilled, (state, action) => {
 				state.loading = false;
-				const currentUser = action.payload?.data?.user;
-				const unfollowedUser = action.payload?.data?.followUser;
+				const currentUser = action.payload?.user;
+				const unfollowedUser = action.payload?.followUser;
 				state.allUsers = updateSingleUser(
 					current(state).allUsers,
 					currentUser,

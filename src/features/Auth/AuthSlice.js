@@ -23,7 +23,8 @@ export const userLogin = createAsyncThunk(
 	"auth/userLogin",
 	async (loginFromData, { rejectWithValue }) => {
 		try {
-			return await axios.post("/api/auth/login", loginFromData);
+			const response = await axios.post("/api/auth/login", loginFromData);
+			return response.data;
 		} catch (error) {
 			return rejectWithValue(error);
 		}
@@ -35,7 +36,8 @@ export const userSignUp = createAsyncThunk(
 	"auth/userSignUp",
 	async (singUpFormData, { rejectWithValue }) => {
 		try {
-			return await axios.post("/api/auth/signup", singUpFormData);
+			const response = await axios.post("/api/auth/signup", singUpFormData);
+			return response.data;
 		} catch (error) {
 			return rejectWithValue(error);
 		}
@@ -63,9 +65,7 @@ export const authSlice = createSlice({
 			})
 			.addCase(userLogin.fulfilled, (state, { meta, payload }) => {
 				state.loading = false;
-				const {
-					data: { encodedToken, foundUser },
-				} = payload;
+				const { encodedToken, foundUser } = payload;
 
 				// If remember me is true then save
 				if (meta.arg.rememberMe) {
@@ -101,9 +101,7 @@ export const authSlice = createSlice({
 			})
 			.addCase(userSignUp.fulfilled, (state, { payload }) => {
 				state.loading = false;
-				const {
-					data: { encodedToken, createdUser },
-				} = payload;
+				const { encodedToken, createdUser } = payload;
 				toast.success(`Welcome ${createdUser.fullName}`);
 				state.authToken = encodedToken;
 				state.userData = createdUser;

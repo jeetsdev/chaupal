@@ -131,7 +131,7 @@ export const postSlice = createSlice({
 			})
 			.addCase(getAllPost.fulfilled, (state, { payload }) => {
 				state.loading = false;
-				state.allPosts = payload?.data?.posts;
+				state.allPosts = payload?.posts;
 			})
 			.addCase(getAllPost.rejected, (state) => {
 				state.loading = false;
@@ -144,7 +144,7 @@ export const postSlice = createSlice({
 			})
 			.addCase(createNewPost.fulfilled, (state, { payload }) => {
 				state.loading = false;
-				state.allPosts = payload?.data?.posts;
+				state.allPosts = payload?.posts;
 				toast.success("Posted successfully.");
 			})
 			.addCase(createNewPost.rejected, (state) => {
@@ -158,7 +158,7 @@ export const postSlice = createSlice({
 			})
 			.addCase(updateUserPost.fulfilled, (state, { payload }) => {
 				state.loading = false;
-				state.allPosts = payload?.data?.posts;
+				state.allPosts = payload?.posts;
 				toast.success("Updated successfully.");
 			})
 			.addCase(updateUserPost.rejected, (state) => {
@@ -172,7 +172,7 @@ export const postSlice = createSlice({
 			})
 			.addCase(deleteUserPost.fulfilled, (state, { payload }) => {
 				state.loading = false;
-				state.allPosts = payload?.data?.posts;
+				state.allPosts = payload?.posts;
 				toast.success("Deleted successfully.");
 			})
 			.addCase(deleteUserPost.rejected, (state) => {
@@ -183,7 +183,7 @@ export const postSlice = createSlice({
 			//! Like user post reducer here
 			.addCase(likePost.fulfilled, (state, { payload }) => {
 				state.loading = false;
-				state.allPosts = payload?.data?.posts;
+				state.allPosts = payload?.posts;
 				toast.success("Liked successfully.");
 			})
 			.addCase(likePost.rejected, (state) => {
@@ -194,7 +194,7 @@ export const postSlice = createSlice({
 			//! Dislike post reducer here
 			.addCase(dislikePost.fulfilled, (state, { payload }) => {
 				state.loading = false;
-				state.allPosts = payload?.data?.posts;
+				state.allPosts = payload?.posts;
 				toast.success("Removed from likes.");
 			})
 			.addCase(dislikePost.rejected, (state) => {
@@ -205,7 +205,7 @@ export const postSlice = createSlice({
 			// ! Add to bookmark reducer here
 			.addCase(addToBookmark.fulfilled, (state, action) => {
 				state.loading = false;
-				state.bookmarkedPost = action.payload?.data?.bookmarks;
+				state.bookmarkedPost = action.payload?.bookmarks;
 				toast.success("Added to bookmark.");
 			})
 			.addCase(addToBookmark.rejected, (state) => {
@@ -216,7 +216,7 @@ export const postSlice = createSlice({
 			// ! Remove from bookmark reducer here
 			.addCase(removeFromBookmark.fulfilled, (state, { payload }) => {
 				state.loading = false;
-				state.bookmarkedPost = payload?.data?.bookmarks;
+				state.bookmarkedPost = payload?.bookmarks;
 				toast.success("Removed from bookmark.");
 			})
 			.addCase(removeFromBookmark.rejected, (state) => {

@@ -1,11 +1,12 @@
 import axios from "axios";
 
-export const getAllUsersService = () => {
-	return axios.get("/api/users");
+export const getAllUsersService = async () => {
+	const response = await axios.get("/api/users");
+	return response.data;
 };
 
-export const updateUserDataService = (userData, authToken) => {
-	return axios.post(
+export const updateUserDataService = async (userData, authToken) => {
+	const response = await axios.post(
 		`/api/users/edit`,
 		{
 			userData: userData,
@@ -14,24 +15,27 @@ export const updateUserDataService = (userData, authToken) => {
 			headers: { authorization: authToken },
 		},
 	);
+	return response.data;
 };
 
-export const followUserService = (followUserID, authToken) => {
-	return axios.post(
+export const followUserService = async (followUserID, authToken) => {
+	const response = await axios.post(
 		`/api/users/follow/${followUserID}`,
 		{},
 		{
 			headers: { authorization: authToken },
 		},
 	);
+	return response.data;
 };
 
-export const unfollowUserService = (unfollowUserID, authToken) => {
-	return axios.post(
+export const unfollowUserService = async (unfollowUserID, authToken) => {
+	const response = await axios.post(
 		`/api/users/unfollow/${unfollowUserID}`,
 		{},
 		{
 			headers: { authorization: authToken },
 		},
 	);
+	return response.data;
 };
