@@ -22,7 +22,7 @@ import { CommentCard } from "../Comment/CommentCard";
 import {
 	addComment,
 	getAllComment,
-} from "../../../features/Commnets/CommentSlice";
+} from "../../../features/Comments/CommentSlice";
 import { loaderImg } from "../../../assets";
 import { useNavigate } from "react-router-dom";
 

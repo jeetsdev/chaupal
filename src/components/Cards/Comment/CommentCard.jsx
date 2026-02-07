@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { MdDelete } from "react-icons/md"
-import { deleteComment } from '../../../features/Commnets/CommentSlice';
+import { deleteComment } from '../../../features/Comments/CommentSlice';
 import { getAllPost } from '../../../features/Post/PostSlice';
 import { useNavigate } from 'react-router-dom';
 

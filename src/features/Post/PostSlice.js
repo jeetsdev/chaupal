@@ -123,105 +123,106 @@ export const postSlice = createSlice({
 			state.postModal = !state.postModal;
 		},
 	},
-	extraReducers: {
-		//! All post reducer here
-		[getAllPost.pending]: (state) => {
-			state.loading = true;
-		},
-		[getAllPost.fulfilled]: (state, { payload }) => {
-			state.loading = false;
-			state.allPosts = payload?.data?.posts;
-		},
-		[getAllPost.rejected]: (state, action) => {
-			state.loading = false;
-			toast.error("Some error occured while fetching posts.");
-		},
+	extraReducers: (builder) => {
+		builder
+			//! All post reducer here
+			.addCase(getAllPost.pending, (state) => {
+				state.loading = true;
+			})
+			.addCase(getAllPost.fulfilled, (state, { payload }) => {
+				state.loading = false;
+				state.allPosts = payload?.data?.posts;
+			})
+			.addCase(getAllPost.rejected, (state) => {
+				state.loading = false;
+				toast.error("Some error occurred while fetching posts.");
+			})
 
-		//! Create new post reducer here
-		[createNewPost.pending]: (state) => {
-			state.loading = true;
-		},
-		[createNewPost.fulfilled]: (state, { payload }) => {
-			state.loading = false;
-			state.allPosts = payload?.data?.posts;
-			toast.success("Posted successfully.");
-		},
-		[createNewPost.rejected]: (state, action) => {
-			state.loading = false;
-			toast.error("Some error occured while creating posts.");
-		},
+			//! Create new post reducer here
+			.addCase(createNewPost.pending, (state) => {
+				state.loading = true;
+			})
+			.addCase(createNewPost.fulfilled, (state, { payload }) => {
+				state.loading = false;
+				state.allPosts = payload?.data?.posts;
+				toast.success("Posted successfully.");
+			})
+			.addCase(createNewPost.rejected, (state) => {
+				state.loading = false;
+				toast.error("Some error occurred while creating posts.");
+			})
 
-		//! Update user post reducer here
-		[updateUserPost.pending]: (state) => {
-			state.loading = true;
-		},
-		[updateUserPost.fulfilled]: (state, { payload }) => {
-			state.loading = false;
-			state.allPosts = payload?.data?.posts;
-			toast.success("Updated successfully.");
-		},
-		[updateUserPost.rejected]: (state, action) => {
-			state.loading = false;
-			toast.error("Some error occured while updating posts.");
-		},
+			//! Update user post reducer here
+			.addCase(updateUserPost.pending, (state) => {
+				state.loading = true;
+			})
+			.addCase(updateUserPost.fulfilled, (state, { payload }) => {
+				state.loading = false;
+				state.allPosts = payload?.data?.posts;
+				toast.success("Updated successfully.");
+			})
+			.addCase(updateUserPost.rejected, (state) => {
+				state.loading = false;
+				toast.error("Some error occurred while updating posts.");
+			})
 
-		//! Delete user post reducer here
-		[deleteUserPost.pending]: (state) => {
-			state.loading = true;
-		},
-		[deleteUserPost.fulfilled]: (state, { payload }) => {
-			state.loading = false;
-			state.allPosts = payload?.data?.posts;
-			toast.success("Deleted successfully.");
-		},
-		[deleteUserPost.rejected]: (state, action) => {
-			state.loading = false;
-			toast.error("Some error occured while deleting posts.");
-		},
+			//! Delete user post reducer here
+			.addCase(deleteUserPost.pending, (state) => {
+				state.loading = true;
+			})
+			.addCase(deleteUserPost.fulfilled, (state, { payload }) => {
+				state.loading = false;
+				state.allPosts = payload?.data?.posts;
+				toast.success("Deleted successfully.");
+			})
+			.addCase(deleteUserPost.rejected, (state) => {
+				state.loading = false;
+				toast.error("Some error occurred while deleting posts.");
+			})
 
-		//! Like user post reducer here
-		[likePost.fulfilled]: (state, { payload }) => {
-			state.loading = false;
-			state.allPosts = payload?.data?.posts;
-			toast.success("Liked successfully.");
-		},
-		[likePost.rejected]: (state, action) => {
-			state.loading = false;
-			toast.error("Some error occured while Liking posts.");
-		},
+			//! Like user post reducer here
+			.addCase(likePost.fulfilled, (state, { payload }) => {
+				state.loading = false;
+				state.allPosts = payload?.data?.posts;
+				toast.success("Liked successfully.");
+			})
+			.addCase(likePost.rejected, (state) => {
+				state.loading = false;
+				toast.error("Some error occurred while Liking posts.");
+			})
 
-		//! Dislike post reducer here
-		[dislikePost.fulfilled]: (state, { payload }) => {
-			state.loading = false;
-			state.allPosts = payload?.data?.posts;
-			toast.success("Removed from likes.");
-		},
-		[dislikePost.rejected]: (state, action) => {
-			state.loading = false;
-			toast.error("Some error occured while Disliking posts.");
-		},
+			//! Dislike post reducer here
+			.addCase(dislikePost.fulfilled, (state, { payload }) => {
+				state.loading = false;
+				state.allPosts = payload?.data?.posts;
+				toast.success("Removed from likes.");
+			})
+			.addCase(dislikePost.rejected, (state) => {
+				state.loading = false;
+				toast.error("Some error occurred while Disliking posts.");
+			})
 
-		// ! Add to bookmark reducer here
-		[addToBookmark.fulfilled]: (state, action) => {
-			state.loading = false;
-			state.bookmarkedPost = action.payload?.data?.bookmarks;
-			toast.success("Added to bookmark.");
-		},
-		[addToBookmark.rejected]: (state, action) => {
-			state.loading = false;
-			toast.error("Error occured while adding to bookmark.");
-		},
+			// ! Add to bookmark reducer here
+			.addCase(addToBookmark.fulfilled, (state, action) => {
+				state.loading = false;
+				state.bookmarkedPost = action.payload?.data?.bookmarks;
+				toast.success("Added to bookmark.");
+			})
+			.addCase(addToBookmark.rejected, (state) => {
+				state.loading = false;
+				toast.error("Error occurred while adding to bookmark.");
+			})
 
-		// ! Remove from bookmark reducer here
-		[removeFromBookmark.fulfilled]: (state, { payload }) => {
-			state.loading = false;
-			state.bookmarkedPost = payload?.data?.bookmarks;
-			toast.success("Removed from bookmark.");
-		},
-		[removeFromBookmark.rejected]: (state, action) => {
-			state.loading = false;
-			toast.error("Error occured while removing from bookmark.");
-		},
+			// ! Remove from bookmark reducer here
+			.addCase(removeFromBookmark.fulfilled, (state, { payload }) => {
+				state.loading = false;
+				state.bookmarkedPost = payload?.data?.bookmarks;
+				toast.success("Removed from bookmark.");
+			})
+			.addCase(removeFromBookmark.rejected, (state) => {
+				state.loading = false;
+				toast.error("Error occurred while removing from bookmark.");
+			});
 	},
 });
 

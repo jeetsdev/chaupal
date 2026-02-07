@@ -55,63 +55,64 @@ export const authSlice = createSlice({
 		},
 	},
 
-	extraReducers: {
-		//! User login reducer here
-		[userLogin.pending]: (state) => {
-			state.loading = true;
-		},
-		[userLogin.fulfilled]: (state, { meta, payload }) => {
-			state.loading = false;
-			const {
-				data: { encodedToken, foundUser },
-			} = payload;
+	extraReducers: (builder) => {
+		builder
+			//! User login reducer here
+			.addCase(userLogin.pending, (state) => {
+				state.loading = true;
+			})
+			.addCase(userLogin.fulfilled, (state, { meta, payload }) => {
+				state.loading = false;
+				const {
+					data: { encodedToken, foundUser },
+				} = payload;
 
-			// If remember me is true then save
-			if (meta.arg.rememberMe) {
-				localStorage.setItem("encoded-token", encodedToken);
-				localStorage.setItem("user-data", JSON.stringify(foundUser));
-			}
-			toast.success(`Welcome back ${foundUser.fullName}`);
-			state.authToken = encodedToken;
-			state.userData = foundUser;
-		},
-		[userLogin.rejected]: (state, { payload }) => {
-			state.loading = false;
-			const { status, statusText } = payload?.response;
+				// If remember me is true then save
+				if (meta.arg.rememberMe) {
+					localStorage.setItem("encoded-token", encodedToken);
+					localStorage.setItem("user-data", JSON.stringify(foundUser));
+				}
+				toast.success(`Welcome back ${foundUser.fullName}`);
+				state.authToken = encodedToken;
+				state.userData = foundUser;
+			})
+			.addCase(userLogin.rejected, (state, { payload }) => {
+				state.loading = false;
+				const { status, statusText } = payload?.response;
 
-			// If email not found
-			if (status === 404) {
-				toast.error(`Username ${statusText}`);
-				state.error.usernameError = `User ${statusText}`;
-				state.error.passwordError = ``;
-			}
+				// If email not found
+				if (status === 404) {
+					toast.error(`Username ${statusText}`);
+					state.error.usernameError = `User ${statusText}`;
+					state.error.passwordError = ``;
+				}
 
-			// If password does not match
-			if (status === 401) {
-				toast.error(`Wrong password!`);
-				state.error.usernameError = ``;
-				state.error.passwordError = `Wrong password!`;
-			}
-		},
+				// If password does not match
+				if (status === 401) {
+					toast.error(`Wrong password!`);
+					state.error.usernameError = ``;
+					state.error.passwordError = `Wrong password!`;
+				}
+			})
 
-		//! User sign up reducer here
-		[userSignUp.pending]: (state) => {
-			state.loading = true;
-		},
-		[userSignUp.fulfilled]: (state, { payload }) => {
-			state.loading = false;
-			const {
-				data: { encodedToken, createdUser },
-			} = payload;
-			toast.success(`Welcome ${createdUser.fullName}`);
-			state.authToken = encodedToken;
-			state.userData = createdUser;
-		},
-		[userSignUp.rejected]: (state, { payload }) => {
-			state.loading = false;
-			const { statusText } = payload?.response;
-			toast.error(`${statusText}`);
-		},
+			//! User sign up reducer here
+			.addCase(userSignUp.pending, (state) => {
+				state.loading = true;
+			})
+			.addCase(userSignUp.fulfilled, (state, { payload }) => {
+				state.loading = false;
+				const {
+					data: { encodedToken, createdUser },
+				} = payload;
+				toast.success(`Welcome ${createdUser.fullName}`);
+				state.authToken = encodedToken;
+				state.userData = createdUser;
+			})
+			.addCase(userSignUp.rejected, (state, { payload }) => {
+				state.loading = false;
+				const { statusText } = payload?.response;
+				toast.error(`${statusText}`);
+			});
 	},
 });
 

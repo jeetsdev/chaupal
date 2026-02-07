@@ -1,8 +1,8 @@
 import Picker from "emoji-picker-react";
 
 export const EmojiPicker = ({ inputSetter, inputRef }) => {
-	// adding eomjies in the input using input setter function
-	const emojiClickHandler = (event, emojiObject) => {
+	// adding emojis in the input using input setter function
+	const emojiClickHandler = (emojiObject) => {
 		// getting cursor location here
 		const cursorPos = inputRef.current.selectionStart;
 
@@ -22,9 +22,7 @@ export const EmojiPicker = ({ inputSetter, inputRef }) => {
 		<>
 			<Picker
 				onEmojiClick={emojiClickHandler}
-				pickerStyle={{
-					width: "100%",
-				}}
+				width="100%"
 			/>
 		</>
 	);
