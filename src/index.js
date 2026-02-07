@@ -12,8 +12,8 @@ makeServer();
 const container = document.getElementById("root");
 const root = createRoot(container);
 
-// Use basename only in production for GitHub Pages
-const basename = process.env.NODE_ENV === "production" ? "/chaupal" : "/";
+// Basename for router
+const basename = "/";
 
 root.render(
 	<React.StrictMode>
